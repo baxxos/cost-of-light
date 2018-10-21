@@ -1,0 +1,435 @@
+fileFormatVersion: 2
+guid: 1ab8e38b92ef5344d9269f87ba3e8dbe
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: character-chopped_0
+    21300002: character-chopped_1
+    21300004: character-chopped_2
+    21300006: character-chopped_3
+    21300008: character-chopped_4
+    21300010: character-chopped_5
+    21300012: character-chopped_6
+    21300014: character-chopped_7
+    21300016: character-chopped_8
+    21300018: character-chopped_9
+    21300020: character-chopped_10
+    21300022: character-chopped_11
+    21300024: character-chopped_12
+    21300026: character-chopped_13
+    21300028: character-chopped_14
+    21300030: character-chopped_15
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: character-chopped_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 922
+        width: 329
+        height: 280
+      alignment: 9
+      pivot: {x: 0.36275908, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df298173228deef4abfb7e3d68706cf4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_1
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 1012
+        width: 98
+        height: 164
+      alignment: 9
+      pivot: {x: 0.18475902, y: 0.891242}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4420f70142ab581458cfa9f89395412a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_2
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 1034
+        width: 220
+        height: 120
+      alignment: 9
+      pivot: {x: 0.06792075, y: 0.26235658}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bba9373c79ba85439e612abd1c75bf9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_3
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 1005
+        width: 115
+        height: 149
+      alignment: 9
+      pivot: {x: 0.47933456, y: 0.86683196}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 406bb511908298945a0e3f2f7fafa37c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_4
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 610
+        width: 216
+        height: 248
+      alignment: 9
+      pivot: {x: 0.50000006, y: 0.06879228}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a241f49ded15d7d4cbefea15073da74e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_5
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 768
+        width: 90
+        height: 174
+      alignment: 9
+      pivot: {x: 0.5264048, y: 0.8960722}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02cddcb404e255943b033e58e5902f6f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_6
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 774
+        width: 135
+        height: 176
+      alignment: 9
+      pivot: {x: 0.21834852, y: 0.89157104}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c1bc31f2cc3b3842bf1e57eb0fac77d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_7
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 783
+        width: 169
+        height: 137
+      alignment: 9
+      pivot: {x: 0.13439472, y: 0.37857613}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 201efa21d5815fb4ca6f1024eafc1f63
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_8
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 461
+        width: 169
+        height: 206
+      alignment: 9
+      pivot: {x: 0.24688883, y: 0.89222676}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd7db9a5096358f438379c6c0721e5a7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_9
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 461
+        width: 91
+        height: 221
+      alignment: 9
+      pivot: {x: 0.4999993, y: 0.94087654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d965c6d80439df48a8c1fa1e63ed0e7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_10
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 504
+        width: 145
+        height: 80
+      alignment: 9
+      pivot: {x: 0.17221554, y: 0.6485268}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 518f7eec24d93cc4ca725dfc9e8e1518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_11
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 147
+        width: 257
+        height: 353
+      alignment: 9
+      pivot: {x: 0.5739745, y: 0.9308547}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 592e9c3e0ad9c824f93d650b1b84dfea
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_12
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 147
+        width: 128
+        height: 211
+      alignment: 9
+      pivot: {x: 0.44430184, y: 0.9167203}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e90961d93f3a4c240a3260f41ca32943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_13
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 151
+        width: 97
+        height: 221
+      alignment: 9
+      pivot: {x: 0.59799665, y: 0.9086174}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a00b155b7184c984cbc58afcd5bb1abb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_14
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 172
+        width: 146
+        height: 66
+      alignment: 9
+      pivot: {x: 0.23956884, y: 0.75204605}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dccdf2f959bbbca4795c4bebafb8f662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character-chopped_15
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 0
+        width: 83
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83788bd0068310f4d92eec3d19b25468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: f1c8721ae069a6f4580b7c6608225f2e
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
