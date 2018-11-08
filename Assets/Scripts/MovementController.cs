@@ -35,15 +35,17 @@ public class MovementController : MonoBehaviour
         if (Input.GetKey("d"))
         {
             spriteRenderer.flipX = false;
-            var move = Vector2.right * speed;
-            rb.velocity = move;
+            var velocity = rb.velocity;
+            velocity.x = speed;
+            rb.velocity = velocity;
         }
 
         if (Input.GetKey("a"))
         {
             spriteRenderer.flipX = true;
-            var move = Vector2.left * speed;
-            rb.velocity = move;
+            var velocity = rb.velocity;
+            velocity.x = -speed;
+            rb.velocity = velocity;
         }
 
         if (Input.GetKeyUp("d") || Input.GetKeyUp("a"))
