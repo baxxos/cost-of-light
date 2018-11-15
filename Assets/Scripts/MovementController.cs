@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    public float speed;
+    public float baseSpeed;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Animator animator;
@@ -36,7 +36,7 @@ public class MovementController : MonoBehaviour
         {
             spriteRenderer.flipX = false;
             var velocity = rb.velocity;
-            velocity.x = speed;
+            velocity.x = baseSpeed;
             rb.velocity = velocity;
         }
 
@@ -44,7 +44,7 @@ public class MovementController : MonoBehaviour
         {
             spriteRenderer.flipX = true;
             var velocity = rb.velocity;
-            velocity.x = -speed;
+            velocity.x = -baseSpeed;
             rb.velocity = velocity;
         }
 
