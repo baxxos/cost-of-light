@@ -1,10 +1,8 @@
-﻿
-using System;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatController : MonoBehaviour {
-    public int baseHealth;
-    public event Action OnPlayerHealthChanged;
+public class HealthBarController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

@@ -173,7 +173,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 768
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 267398520}
+  m_TargetTexture: {fileID: 2073557423}
   m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 1
@@ -282,8 +282,7 @@ Transform:
   m_LocalScale: {x: 0.375, y: 0.375, z: 0.25}
   m_Children:
   - {fileID: 1368035124}
-  - {fileID: 1792754881}
-  - {fileID: 357772775}
+  - {fileID: 1356699109}
   - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -385,7 +384,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.26, y: 14.7}
+    oldSize: {x: 8.26, y: 14.65}
     newSize: {x: 8.26, y: 14.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -655,37 +654,6 @@ Transform:
   m_Father: {fileID: 2112495762}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &267398520
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 889
-  m_Height: 500
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 7
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &337449559
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +678,7 @@ Transform:
   m_GameObject: {fileID: 337449559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5, y: 0, z: 0}
-  m_LocalScale: {x: 500, y: 25, z: 1}
+  m_LocalScale: {x: 500, y: 25.000002, z: 1}
   m_Children: []
   m_Father: {fileID: 1330568894}
   m_RootOrder: 0
@@ -755,7 +723,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.006666667, y: 0.006666667}
+  m_Size: {x: 0.1, y: 0.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -801,7 +769,7 @@ GameObject:
   - component: {fileID: 357772776}
   - component: {fileID: 357772778}
   m_Layer: 9
-  m_Name: Lamp Flicker
+  m_Name: Flickering Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -813,12 +781,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 357772774}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.4176254, y: -0.8, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
-  m_Father: {fileID: 96560543}
-  m_RootOrder: 2
+  m_Father: {fileID: 1356699109}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &357772776
 MonoBehaviour:
@@ -1079,7 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 09755a4891f8d4526a7e0690a23dec7b, type: 3}
-  spriteLightRT: {fileID: 267398520}
+  spriteLightRT: {fileID: 2073557423}
   intensity: 1.25
 --- !u!20 &519420031
 Camera:
@@ -1133,7 +1101,7 @@ Transform:
   m_Children:
   - {fileID: 16588079}
   m_Father: {fileID: 96560543}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &616475703
 GameObject:
@@ -1721,6 +1689,36 @@ Transform:
   m_Father: {fileID: 239457565}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1356699108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356699109}
+  m_Layer: 0
+  m_Name: Lantern
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1356699109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1356699108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5, y: -0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 357772775}
+  - {fileID: 1792754881}
+  m_Father: {fileID: 96560543}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1368035123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,7 +1741,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1368035123}
   m_LocalRotation: {x: 0, y: 0, z: -0.74512815, w: 0.6669213}
-  m_LocalPosition: {x: -0.68463016, y: 2.11779, z: 0}
+  m_LocalPosition: {x: -0.6030099, y: 2.0472946, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 916296533}
@@ -1950,6 +1948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1685774141}
+  - component: {fileID: 1685774142}
   m_Layer: 9
   m_Name: Bar
   m_TagString: Untagged
@@ -1971,6 +1970,18 @@ Transform:
   m_Father: {fileID: 1796325804}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1685774142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1685774140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db98f11a5f4af024a89cf632aef3f25a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lanternController: {fileID: 1792754882}
 --- !u!1 &1705755877
 GameObject:
   m_ObjectHideFlags: 0
@@ -2011,7 +2022,7 @@ GameObject:
   - component: {fileID: 1792754880}
   - component: {fileID: 1792754882}
   m_Layer: 8
-  m_Name: Lamp Glow
+  m_Name: Glowing Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2070,10 +2081,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1792754879}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.38, y: -0.78, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 35.0082, y: 19.730515, z: 4}
   m_Children: []
-  m_Father: {fileID: 96560543}
+  m_Father: {fileID: 1356699109}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1792754882
@@ -2088,6 +2099,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enabledByDefault: 0
+  maxFuelLevel: 100
+  fuelLevel: 100
+  fuelConsumption: 5
 --- !u!1 &1796325803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2659,6 +2673,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &2073557423
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1031
+  m_Height: 580
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 7
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &2112495761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2693,7 +2738,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 890, y: 900}
+  m_SizeDelta: {x: 1031, y: 340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2112495763
 CanvasRenderer:
