@@ -19,5 +19,6 @@ public class ScrollingBackground : MonoBehaviour {
         // Keep only a fixed portion of the velocity of the followed object
         Vector2 referenceVelocity = objectToFollow.GetComponent<Rigidbody2D>().velocity;
         this.rb2d.velocity = referenceVelocity - (referenceVelocity * scrollSpeed);
+        // TODO: prevent the background from scrolling when running into a static object
 	}
 }
