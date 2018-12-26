@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
     public GameObject playerObject;
-    public float rangeOfView;
+    [Tooltip("Speed at which the enemy approaches the player.")]
     public float approachSpeed;
+    [Tooltip("Distance between player object and the enemy.")]
     public float approachDistance;
+    [Tooltip("Speed at which the enemy follows the player.")]
+    public float followSpeed;
+    [Tooltip("How long (horizontal distance) should the enemy follow the player.")]
+    public float followRange;
 
     private SpriteRenderer spriteRenderer;
-    private bool approaching;
+    private bool approaching = false;
 
 	// Use this for initialization
 	void Start () {
@@ -25,9 +30,12 @@ public class EnemyController : MonoBehaviour {
         }
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        approaching = true;
+        if (col.gameObject.tag == "Player")
+        {
+            approaching = true;
+        }
     }
 
     private void FollowPlayer(GameObject player)
@@ -39,23 +47,23 @@ public class EnemyController : MonoBehaviour {
     {
         var currentPosition = transform.position;
         var distance = currentPosition.x - player.transform.position.x;
-        float approachDirectionX = (distance > 0f ? -1f : 1f);  // Equal to 1 when going right and -1 when going left
+        float directionHorizontal = (distance > 0f ? -1f : 1f);  // Equal to 1 when going right and -1 when going left
 
         transform.position = new Vector2(
-            currentPosition.x + (approachDirectionX * approachSpeed * Time.deltaTime),
+            currentPosition.x + (directionHorizontal * approachSpeed * Time.deltaTime),
             currentPosition.y
         );
 
-        if (approachDirectionX > 0 && spriteRenderer.flipX)
+        if (directionHorizontal > 0 && spriteRenderer.flipX)
         {
             spriteRenderer.flipX = false;
         }
-        else if (approachDirectionX < 0 && !spriteRenderer.flipX)
+        else if (directionHorizontal < 0 && !spriteRenderer.flipX)
         {
             spriteRenderer.flipX = true;
         }
 
-        if (Math.Abs(distance) < Math.Abs(approachDistance))
+        if (Math.Abs(distance) <= Math.Abs(approachDistance))
         {
             approaching = false;
         }
