@@ -4,7 +4,6 @@ using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
-    public GameObject playerObject;
     [Tooltip("Speed at which the enemy approaches the player.")]
     public float approachSpeed;
     [Tooltip("Distance between player object and the enemy.")]
@@ -14,13 +13,15 @@ public class EnemyController : MonoBehaviour {
     [Tooltip("How long (horizontal distance) should the enemy follow the player.")]
     public float followRange;
 
-    private SpriteRenderer spriteRenderer;
     private bool approaching = false;
+    private GameObject playerObject;
+    private SpriteRenderer spriteRenderer;
 
 	// Use this for initialization
 	void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
-	}
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+    }
 	
 	// Update is called once per frame
 	void Update () {
