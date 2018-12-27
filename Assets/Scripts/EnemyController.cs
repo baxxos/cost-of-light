@@ -63,7 +63,6 @@ public class EnemyController : MonoBehaviour {
 
     private void ReturnToSpawnCoords()
     {
-        // TODO: flip X
         float tolerance = .15f;
 
         // Check if the spawn position has been reached  (ignore the vertical position since we can't do anything about it)
@@ -71,6 +70,7 @@ public class EnemyController : MonoBehaviour {
         {
             StopMoving();
             currentState = EnemyState.idle;
+            spriteRenderer.flipX = false;
         }
         else
         {
@@ -78,6 +78,9 @@ public class EnemyController : MonoBehaviour {
             var velocity = rb2d.velocity;
             velocity.x = (transform.position.x < spawnCoords.x ? followSpeed : -followSpeed);
             rb2d.velocity = velocity;
+
+            // Flip the sprite according to the movement direction
+            spriteRenderer.flipX = (velocity.x < 0);
         }
     }
 
@@ -105,23 +108,15 @@ public class EnemyController : MonoBehaviour {
 
     private void ApproachPlayer(GameObject player)
     {
-        var distance = transform.position.x - player.transform.position.x;
-        float directionHorizontal = (distance > 0f ? -1f : 1f);  // 1 when going right and -1 when going left
-
-        if (directionHorizontal > 0 && spriteRenderer.flipX)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if (directionHorizontal < 0 && !spriteRenderer.flipX)
-        {
-            spriteRenderer.flipX = true;
-        }
-
         transform.position = Vector2.MoveTowards(
             transform.position, 
             player.transform.position,
             approachSpeed * Time.deltaTime
         );
+
+        // Flip the sprite according to the movement direction
+        var distance = transform.position.x - player.transform.position.x;
+        spriteRenderer.flipX = (distance > 0f);
 
         if (Math.Abs(distance) <= approachDistance)
         {
