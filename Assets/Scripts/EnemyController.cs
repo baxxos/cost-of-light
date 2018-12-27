@@ -56,9 +56,29 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
+    private void StopMoving()
+    {
+        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+    }
+
     private void ReturnToSpawnCoords()
     {
+        // TODO: flip X
+        float tolerance = .15f;
 
+        // Check if the spawn position has been reached  (ignore the vertical position since we can't do anything about it)
+        if ((transform.position.x >= (spawnCoords.x - tolerance)) && (transform.position.x <= (spawnCoords.x + tolerance)))
+        {
+            StopMoving();
+            currentState = EnemyState.idle;
+        }
+        else
+        {
+            // Keep a fixed velocity while retreating
+            var velocity = rb2d.velocity;
+            velocity.x = (transform.position.x < spawnCoords.x ? followSpeed : -followSpeed);
+            rb2d.velocity = velocity;
+        }
     }
 
     private void FollowPlayer(GameObject player)
@@ -73,7 +93,7 @@ public class EnemyController : MonoBehaviour {
             // If we catch the player, set the velocity to 0 and start attacking
             if (Math.Abs(transform.position.x - player.transform.position.x) <= approachDistance)
             {
-                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                StopMoving();
                 // currentState = EnemyState.attacking;
             }
         }

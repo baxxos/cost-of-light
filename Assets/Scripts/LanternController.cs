@@ -12,7 +12,7 @@ public class LanternController : MonoBehaviour {
     public event Action OnFuelDepleted;
 
     private SpriteRenderer spriteRenderer;
-    private GameObject[] enlightedSprites;
+    private List<GameObject> enlightedSprites;
     private List<Color> enlightedSpritesColors;
 
 	// Use this for initialization
@@ -20,8 +20,10 @@ public class LanternController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.enabled = enabledByDefault;
 
-        enlightedSprites = GameObject.FindGameObjectsWithTag("Player");
-        enlightedSpritesColors = new List<Color>(enlightedSprites.Length);
+        enlightedSprites = new List<GameObject>();
+        enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        enlightedSpritesColors = new List<Color>(enlightedSprites.Count);
 
         // Remember the original colors of all sprites interacting with light
         foreach (GameObject sprite in enlightedSprites)
@@ -60,7 +62,7 @@ public class LanternController : MonoBehaviour {
     {
         spriteRenderer.enabled = newState;
 
-        for (int i = 0; i < enlightedSprites.Length; i++)
+        for (int i = 0; i < enlightedSprites.Count; i++)
         {
             var sprite = enlightedSprites[i];
             sprite.GetComponent<SpriteRenderer>().color = (spriteRenderer.enabled ? enlightedSpritesColors[i] : Color.black);
