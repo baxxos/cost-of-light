@@ -13,9 +13,8 @@ public class EnemyController : MonoBehaviour {
     [Tooltip("How long (horizontal distance) should the enemy follow the player.")]
     public float followRange;
 
-    private bool returning = false;
-    private bool following = false;
-    private bool approaching = false;
+    private enum EnemyState { approaching, attacking, following, returning, idle };
+    private EnemyState currentState;
     private Rigidbody2D rb2d;
     private GameObject playerObject;
     private SpriteRenderer spriteRenderer;
@@ -26,66 +25,62 @@ public class EnemyController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         playerObject = GameObject.FindGameObjectWithTag("Player");
+
         spawnCoords = transform.position;
+        currentState = EnemyState.idle;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (approaching)
+        switch (currentState)
         {
-            ApproachPlayer(playerObject);
-        }
-        else if (following)
-        {
-            FollowPlayer(playerObject);
+            case EnemyState.approaching:
+                ApproachPlayer(playerObject);
+                break;
+            case EnemyState.following:
+                FollowPlayer(playerObject);
+                break;
+            case EnemyState.returning:
+                ReturnToSpawnCoords();
+                break;
+            default:
+                break;
         }
 	}
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (!following && col.gameObject.tag == "Player")
+        if ((currentState == EnemyState.idle) && (col.gameObject.tag == "Player"))
         {
-            approaching = true;
+            currentState = EnemyState.approaching;
         }
+    }
+
+    private void ReturnToSpawnCoords()
+    {
+
     }
 
     private void FollowPlayer(GameObject player)
     {
-        // TODO: simplify
-        var targetPosition = new Vector2(player.transform.position.x, transform.position.y);
-
-        if (transform.position.x < targetPosition.x)
-        {
-            targetPosition.x -= approachDistance;
-        }
-        else
-        {
-            targetPosition.x += approachDistance;
-        }
-
         if (Math.Abs(transform.position.x - spawnCoords.x) <= followRange)
         {
-            // Debug.Log(Math.Abs(transform.position.x - targetPosition.x));
-            if (Math.Abs(transform.position.x - targetPosition.x) > approachDistance)
+            // Keep a fixed velocity while following the player
+            var velocity = rb2d.velocity;
+            velocity.x = (transform.position.x < player.transform.position.x ? followSpeed : -followSpeed);
+            rb2d.velocity = velocity;
+
+            // If we catch the player, set the velocity to 0 and start attacking
+            if (Math.Abs(transform.position.x - player.transform.position.x) <= approachDistance)
             {
-                transform.position = Vector2.MoveTowards(
-                    transform.position,
-                    targetPosition,
-                    followSpeed * Time.deltaTime
-                );
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                // currentState = EnemyState.attacking;
             }
         }
         else
         {
-            // TODO: returning method
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                spawnCoords,
-                followSpeed * Time.deltaTime
-            );
+            currentState = EnemyState.returning;
         }
-
-        // Stop following
     }
 
     private void ApproachPlayer(GameObject player)
@@ -110,8 +105,7 @@ public class EnemyController : MonoBehaviour {
 
         if (Math.Abs(distance) <= approachDistance)
         {
-            approaching = false;
-            following = true;
+            currentState = EnemyState.following;
             // TODO: attacking instead of following (follow only when player walks away)
         }
     }
