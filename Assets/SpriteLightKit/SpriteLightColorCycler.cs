@@ -26,67 +26,72 @@ namespace Prime31
 	}
 
 
-	public class SpriteLightColorCycler : MonoBehaviour
-	{
-		public SLKColorchannels colorChannel = SLKColorchannels.All;
-		public SLKWaveFunctions waveFunction = SLKWaveFunctions.Sin;
-		[Tooltip( "This value is added to the final result" )]
-		[Range( 0f, 1f )]
-		public float offset = 0.0f;
-		[Range( 0.2f, 2f )]
-		public float amplitude = 1.0f;
-		[Tooltip( "start point in wave function" )]
-		[Range( 0f, 1f )]
-		public float phase = 0.0f;
-		[Tooltip( "cycles per second" )]
-		[Range( 0.01f, 10f )]
-		public float frequency = 0.5f;
-		[Tooltip( "should the alpha be changed as well as colors" )]
-		public bool affectsIntensity = true;
+    public class SpriteLightColorCycler : MonoBehaviour
+    {
+        public SLKColorchannels colorChannel = SLKColorchannels.All;
+        public SLKWaveFunctions waveFunction = SLKWaveFunctions.Sin;
+        [Tooltip("This value is added to the final result")]
+        [Range(0f, 1f)]
+        public float offset = 0.0f;
+        [Range(0.2f, 2f)]
+        public float amplitude = 1.0f;
+        [Tooltip("start point in wave function")]
+        [Range(0f, 1f)]
+        public float phase = 0.0f;
+        [Tooltip("cycles per second")]
+        [Range(0.01f, 10f)]
+        public float frequency = 0.5f;
+        [Tooltip("should the alpha be changed as well as colors")]
+        public bool affectsIntensity = true;
 
-		// cache original values
-		SpriteRenderer _spriteRenderer;
-		Color originalColor;
-		float originalIntensity;
-
-
-		void Awake()
-		{
-			_spriteRenderer = GetComponent<SpriteRenderer>();
-			originalColor = _spriteRenderer.color;
-			originalIntensity = originalColor.a;
-		}
+        // cache original values
+        SpriteRenderer _spriteRenderer;
+        Color originalColor;
+        float originalIntensity;
 
 
+        void Awake()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            originalColor = _spriteRenderer.color;
+            originalIntensity = originalColor.a;
+        }
 
-		void Update()
-		{
-			var color = _spriteRenderer.color;
 
-			switch( colorChannel )
-			{
-				case SLKColorchannels.All:
-					color = originalColor * evaluateWaveFunction();
-					break;
-				case SLKColorchannels.Red:
-					color = new Color( originalColor.r * evaluateWaveFunction(), color.g, color.b, color.a );
-					break;
-				case SLKColorchannels.Green:
-					color = new Color( color.r, originalColor.g * evaluateWaveFunction(), color.b, color.a );
-					break;
-				case SLKColorchannels.Blue:
-					color = new Color( color.r, color.g, originalColor.b * evaluateWaveFunction(), color.a );
-					break;
-			}
 
-			if( affectsIntensity )
-				color.a = originalIntensity * evaluateWaveFunction();
-			else
-				color.a = originalColor.a;
+        void Update()
+        {
+            var color = _spriteRenderer.color;
 
-			_spriteRenderer.color = color;
-		}
+            switch (colorChannel)
+            {
+                case SLKColorchannels.All:
+                    color = originalColor * evaluateWaveFunction();
+                    break;
+                case SLKColorchannels.Red:
+                    color = new Color(originalColor.r * evaluateWaveFunction(), color.g, color.b, color.a);
+                    break;
+                case SLKColorchannels.Green:
+                    color = new Color(color.r, originalColor.g * evaluateWaveFunction(), color.b, color.a);
+                    break;
+                case SLKColorchannels.Blue:
+                    color = new Color(color.r, color.g, originalColor.b * evaluateWaveFunction(), color.a);
+                    break;
+            }
 
+            if (affectsIntensity)
+                color.a = originalIntensity * evaluateWaveFunction();
+            else
+                color.a = originalColor.a;
+
+            _spriteRenderer.color = color;
+        }
+
+        public void ChangeOriginalColor(Color newColor)
+        {
+            originalColor = newColor;
+            originalIntensity = newColor.a;
+        }
 
 		private float evaluateWaveFunction()
 		{

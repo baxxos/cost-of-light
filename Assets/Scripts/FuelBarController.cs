@@ -20,15 +20,15 @@ public class FuelBarController : MonoBehaviour {
 
     void OnEnable()
     {
-        lanternController.OnFuelLevelChanged += HandleFuelLevelChanged;
+        lanternController.OnFuelLevelChanged += HandleFuelLevelChange;
     }
 
     void OnDisable()
     {
-        lanternController.OnFuelLevelChanged -= HandleFuelLevelChanged;
+        lanternController.OnFuelLevelChanged -= HandleFuelLevelChange;
     }
 
-    private void HandleFuelLevelChanged(float fuelLevel, float maxFuelLevel)
+    private void HandleFuelLevelChange(float fuelLevel, float maxFuelLevel)
     {
         transform.localScale = new Vector2(fuelLevel / maxFuelLevel, transform.localScale.y);
     }

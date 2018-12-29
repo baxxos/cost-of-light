@@ -5,12 +5,18 @@ using UnityEngine;
 public class LanternController : MonoBehaviour {
     // TODO: move this controller to the lantern game object (not the lights - add those as references)
     public bool enabledByDefault;
-    public float maxFuelLevel;
-    public float fuelLevel;
-    public float fuelConsumption;
+    public float maxFuelLevel = 100;
+    public float fuelLevel = 100;
+    public float fuelConsumptionRate;
+    public float fuelGenerationRate;
+    public float fuelToHealthRatio = 1;
+    public CombatController combatController;
     public event Action<float, float> OnFuelLevelChanged;
     public event Action OnFuelDepleted;
 
+    private bool isLit;
+    private bool isChanneling;
+    private Color originalLightColor;
     private SpriteRenderer spriteRenderer;
     private List<GameObject> enlightedSprites;
     private List<Color> enlightedSpritesColors;
@@ -19,6 +25,8 @@ public class LanternController : MonoBehaviour {
 	void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.enabled = enabledByDefault;
+        isLit = enabledByDefault;
+        originalLightColor = spriteRenderer.color;
 
         enlightedSprites = new List<GameObject>();
         enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("Player"));
@@ -40,53 +48,90 @@ public class LanternController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // Toggle the light rendering on mouse click or key press
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown("e"))
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E))
         {
-            if (fuelLevel >= 0)
+            if (fuelLevel > 0)
             {
-                ToggleLanternState(!spriteRenderer.enabled);
+                ToggleLanternLit(!isLit);
             }
             else
             {
                 // TODO: play some sound
             }
         }
-
-        if (spriteRenderer.enabled && fuelLevel > 0)
+        // Replenish fuel in exchange of health while a key is held down
+        else if (Input.GetKey(KeyCode.LeftShift))
         {
-            ConsumeLanternFuel();
+            spriteRenderer.color = Color.red;
+            spriteRenderer.enabled = true;
+            ExchangeLanternFuel(fuelGenerationRate * Time.deltaTime);
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            if (!isLit)
+            {
+                spriteRenderer.enabled = false;
+            }
+            spriteRenderer.color = originalLightColor;
+        }
+        
+        if (isLit)
+        {
+            ConsumeLanternFuel(fuelConsumptionRate * Time.deltaTime);
         }
     }
 
-    private void ToggleLanternState(bool newState)
+    private void ToggleLanternLit(bool newState)
     {
-        spriteRenderer.enabled = newState;
+        isLit = newState;
+        spriteRenderer.enabled = (isLit ? true : false);
 
         for (int i = 0; i < enlightedSprites.Count; i++)
         {
             var sprite = enlightedSprites[i];
-            sprite.GetComponent<SpriteRenderer>().color = (spriteRenderer.enabled ? enlightedSpritesColors[i] : Color.black);
+            sprite.GetComponent<SpriteRenderer>().color = (isLit ? enlightedSpritesColors[i] : Color.black);
         }
     }
 
-    private void ConsumeLanternFuel()
+    private void ConsumeLanternFuel(float amount)
     {
-        fuelLevel -= fuelConsumption * Time.deltaTime;
+        // Stop rendering light & notify subscribers there's no fuel left
+        if (fuelLevel - amount <= 0)
+        {
+            ToggleLanternLit(false);
+
+            if (OnFuelDepleted != null)
+            {
+                OnFuelDepleted();
+            }
+
+            return;
+        }
+
+        fuelLevel -= amount;
 
         // Notify subscribers about fuel level decrease
         if (OnFuelLevelChanged != null)
         {
             OnFuelLevelChanged(fuelLevel, maxFuelLevel);
         }
+    }
 
-        // Stop rendering light & notify subscribers there's no fuel left
-        if (fuelLevel <= 0)
+    private void AddLanternFuel(float amount)
+    {
+        // Prevent exceeding the maximum fuel limit
+        fuelLevel = (fuelLevel + amount >= maxFuelLevel ? maxFuelLevel : fuelLevel + amount);
+
+        // Notify subscribers about fuel level increase
+        if (OnFuelLevelChanged != null)
         {
-            ToggleLanternState(false);
-
-            if (OnFuelDepleted != null) {
-                OnFuelDepleted();
-            }
+            OnFuelLevelChanged(fuelLevel, maxFuelLevel);
         }
+    }
+
+    private void ExchangeLanternFuel(float amount)
+    {
+        combatController.DecreaseHealth(amount * fuelToHealthRatio);
+        AddLanternFuel(amount);
     }
 }
