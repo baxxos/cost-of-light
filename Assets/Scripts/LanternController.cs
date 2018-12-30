@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Prime31;
 
 public class LanternController : MonoBehaviour {
     // TODO: move this controller to the lantern game object (not the lights - add those as references)
@@ -15,19 +16,33 @@ public class LanternController : MonoBehaviour {
     public event Action OnFuelDepleted;
 
     private bool isLit;
-    private bool isChanneling;
     private Color originalLightColor;
-    private SpriteRenderer spriteRenderer;
+    private SLKWaveFunctions originalWaveFunction;
+    private Dictionary<string, float> originalWaveFunctionParameters;
     private List<GameObject> enlightedSprites;
     private List<Color> enlightedSpritesColors;
+    private SpriteRenderer spriteRenderer;
+    private SpriteLightColorCycler colorCycler;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        colorCycler = GetComponent<SpriteLightColorCycler>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         spriteRenderer.enabled = enabledByDefault;
         isLit = enabledByDefault;
-        originalLightColor = spriteRenderer.color;
 
+        // Remember the original light effect settings to restore them later
+        originalLightColor = spriteRenderer.color;
+        originalWaveFunction = colorCycler.waveFunction;
+        originalWaveFunctionParameters = new Dictionary<string, float>()
+        {
+            { "offset", colorCycler.offset },
+            { "amplitude", colorCycler.amplitude },
+            { "frequency", colorCycler.frequency }
+        };
+
+        // Compose a list of sprites affected by this light
         enlightedSprites = new List<GameObject>();
         enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
@@ -78,6 +93,22 @@ public class LanternController : MonoBehaviour {
         if (isLit)
         {
             ConsumeLanternFuel(fuelConsumptionRate * Time.deltaTime);
+
+            // TODO: low fuel event
+            if (fuelLevel < maxFuelLevel / 10)
+            {
+                colorCycler.offset = 0.875f;
+                colorCycler.amplitude = 0.125f;
+                colorCycler.frequency = 0.1f;
+                colorCycler.waveFunction = SLKWaveFunctions.Random;
+            }
+            else if (colorCycler.waveFunction == SLKWaveFunctions.Random)
+            {
+                colorCycler.waveFunction = originalWaveFunction;
+                colorCycler.offset = originalWaveFunctionParameters["offset"];
+                colorCycler.amplitude = originalWaveFunctionParameters["amplitude"];
+                colorCycler.frequency = originalWaveFunctionParameters["frequency"];
+            }
         }
     }
 
