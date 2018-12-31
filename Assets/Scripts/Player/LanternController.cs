@@ -11,7 +11,7 @@ public class LanternController : MonoBehaviour {
     public float fuelConsumptionRate;
     public float fuelGenerationRate;
     public float fuelToHealthRatio = 1;
-    public CombatController combatController;
+    public PlayerCombatController combatController;
     public event Action<float, float> OnFuelLevelChanged;
     public event Action OnFuelDepleted;
 
@@ -77,7 +77,7 @@ public class LanternController : MonoBehaviour {
         // Replenish fuel in exchange of health while a key is held down
         else if (Input.GetKey(KeyCode.LeftShift))
         {
-            spriteRenderer.color = Color.red;
+            colorCycler.ChangeOriginalColor(Color.red);
             spriteRenderer.enabled = true;
             ExchangeLanternFuel(fuelGenerationRate * Time.deltaTime);
         }
@@ -87,7 +87,7 @@ public class LanternController : MonoBehaviour {
             {
                 spriteRenderer.enabled = false;
             }
-            spriteRenderer.color = originalLightColor;
+            colorCycler.ChangeOriginalColor(originalLightColor);
         }
         
         if (isLit)

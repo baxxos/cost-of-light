@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBarController : MonoBehaviour {
-    public CombatController combatController;
+    public PlayerCombatController combatController;
 
     // Use this for initialization
     void Start()

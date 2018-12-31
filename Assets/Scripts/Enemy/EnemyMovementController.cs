@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyMovementController : MonoBehaviour {
     [Tooltip("Speed at which the enemy approaches the player.")]
     public float approachSpeed;
     [Tooltip("Distance between player object and the enemy.")]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class MovementController : MonoBehaviour
+public class PlayerMovementController : MonoBehaviour
 {
     public float baseSpeed;
     private SpriteRenderer spriteRenderer;
@@ -27,7 +27,6 @@ public class MovementController : MonoBehaviour
     private void HandleControls()
     {
         HandleKeyControls();
-        HandleMouseControls();
     }
 
     private void HandleKeyControls()
@@ -54,13 +53,5 @@ public class MovementController : MonoBehaviour
         }
 
         animator.SetFloat("horizontalMovement", Math.Abs(rb.velocity.x));
-    }
-
-    private void HandleMouseControls()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("attack");
-        }
     }
 }

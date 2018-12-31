@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61783653734999180}
   - component: {fileID: 114140073360438968}
   - component: {fileID: 50658295654114958}
+  - component: {fileID: 114790219584540228}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1368942071145386}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.29, y: -0.82, z: 0}
+  m_LocalPosition: {x: 6.33, y: -2.53, z: 0}
   m_LocalScale: {x: 0.43408, y: 0.43408, z: 0.43408}
   m_Children: []
   m_Father: {fileID: 0}
@@ -125,10 +126,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4cc686cac35434fa589e49ef2b1c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  approachSpeed: 7.5
-  approachDistance: 2.5
+  approachSpeed: 8
+  approachDistance: 2
   followSpeed: 4
-  followRange: 10
+  followRange: 5
+--- !u!114 &114790219584540228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368942071145386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7182a77fe9220c648a353f594f96187d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
 --- !u!212 &212060498508009548
 SpriteRenderer:
   m_ObjectHideFlags: 1
