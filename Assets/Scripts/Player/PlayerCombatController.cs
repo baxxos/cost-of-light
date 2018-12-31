@@ -6,7 +6,7 @@ public class PlayerCombatController : MonoBehaviour {
     public float health = 100;
     public float maxHealth = 100;
     public float damagePerHit = 100;
-    public float attackRadius = 0.25f;
+    public float attackRadius = 0.15f;
     public Transform attackPoint;
     public event Action<float, float> OnPlayerHealthChanged;
     public event Action OnPlayerHealthZero;
@@ -46,8 +46,9 @@ public class PlayerCombatController : MonoBehaviour {
                 {
                     continue;
                 }
-                else
+                else if (!hitObject.isTrigger)
                 {
+                    Debug.Log("Enemy hit");
                     hitObject.GetComponent<EnemyCombatController>().DecreaseHealth(damagePerHit);
                 }
             }

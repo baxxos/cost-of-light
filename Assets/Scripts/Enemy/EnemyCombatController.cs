@@ -16,11 +16,11 @@ public class EnemyCombatController : MonoBehaviour {
 	void Update () {
 		if (isInvincible)
         {
-            Debug.Log("Enemy CAN BE attacked now");
+            // Debug.Log("Enemy CAN BE attacked now");
         }
         else
         {
-            Debug.Log("Enemy CANNOT BE attacked now");
+            // Debug.Log("Enemy CANNOT BE attacked now");
         }
 	}
 
