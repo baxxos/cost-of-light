@@ -15,24 +15,30 @@ public class EnemyMovementController : MonoBehaviour {
     [Tooltip("Reference to the actual sprite of the enemy character.")]
     public SpriteRenderer spriteRenderer;
 
-    private enum EnemyState { approaching, attacking, following, returning, idle };
-    private EnemyState currentState;
+    // List of available enemy states and a property holding the current one
+    public enum EnemyState { approaching, attacking, following, returning, idle };
+    public EnemyState CurrentState { get; set; }
+
+    private Animator animator;
     private Rigidbody2D rb2d;
     private GameObject playerObject;
     private Vector2 spawnCoords;
+    private EnemyCombatController combatController;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         rb2d = GetComponent<Rigidbody2D>();
+        combatController = GetComponent<EnemyCombatController>();
+        animator = GetComponent<Animator>();
         playerObject = GameObject.FindGameObjectWithTag("SpritePlayer");
 
         spawnCoords = transform.position;
-        currentState = EnemyState.idle;
+        CurrentState = EnemyState.idle;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        switch (currentState)
+        switch (CurrentState)
         {
             case EnemyState.approaching:
                 ApproachPlayer(playerObject);
@@ -43,6 +49,12 @@ public class EnemyMovementController : MonoBehaviour {
             case EnemyState.returning:
                 ReturnToSpawnCoords();
                 break;
+            case EnemyState.attacking:
+                if (!IsInvoking("PerformAttack"))
+                {
+                    Invoke("PerformAttack", combatController.attackCooldown);
+                }
+                break;
             default:
                 break;
         }
@@ -50,15 +62,34 @@ public class EnemyMovementController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if ((currentState == EnemyState.idle) && (col.gameObject.tag == "SpritePlayer"))
+        if ((CurrentState == EnemyState.idle) && (col.gameObject.tag == "SpritePlayer"))
         {
-            currentState = EnemyState.approaching;
+            CurrentState = EnemyState.approaching;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "SpritePlayer")
+        {
+            CancelAttack();
+            CurrentState = EnemyState.returning;
         }
     }
 
     private void StopMoving()
     {
         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+    }
+
+    private void PerformAttack()
+    {
+        animator.SetTrigger("attack");
+    }
+
+    private void CancelAttack()
+    {
+        CancelInvoke("PerformAttack");
     }
 
     private void ReturnToSpawnCoords()
@@ -69,7 +100,7 @@ public class EnemyMovementController : MonoBehaviour {
         if ((transform.position.x >= (spawnCoords.x - tolerance)) && (transform.position.x <= (spawnCoords.x + tolerance)))
         {
             StopMoving();
-            currentState = EnemyState.idle;
+            CurrentState = EnemyState.idle;
             spriteRenderer.flipX = false;
         }
         else
@@ -102,7 +133,7 @@ public class EnemyMovementController : MonoBehaviour {
         }
         else
         {
-            currentState = EnemyState.returning;
+            CurrentState = EnemyState.returning;
         }
     }
 
@@ -119,8 +150,10 @@ public class EnemyMovementController : MonoBehaviour {
         if (Math.Abs(distance) <= approachDistance)
         {
             StopMoving();
-            currentState = EnemyState.following;
-            // TODO: attacking instead of following (follow only when player walks away)
+            PerformAttack();
+            CurrentState = EnemyState.attacking;
         }
     }
+
+
 }

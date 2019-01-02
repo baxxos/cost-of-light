@@ -235,6 +235,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  damagePerHit: 10
+  attackCooldown: 1
   stateSwitchTimeMin: 3
   stateSwitchTimeMax: 8
   stateIndicator: {fileID: 212599174660910300}

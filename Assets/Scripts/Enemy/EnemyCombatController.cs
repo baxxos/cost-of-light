@@ -7,6 +7,10 @@ public class EnemyCombatController : MonoBehaviour {
     public float health = 100;
     [Tooltip("Maximum amount of health.")]
     public float maxHealth = 100;
+    [Tooltip("Damage dealt per one hit.")]
+    public float damagePerHit = 10;
+    [Tooltip("Time (seconds) between two subsequent attacks.")]
+    public float attackCooldown = 1;
     [Tooltip("Minimum amount of time spent in the same state.")]
     public float stateSwitchTimeMin = 3f;
     [Tooltip("Maximum amount of time spent in the same state.")]
@@ -14,26 +18,21 @@ public class EnemyCombatController : MonoBehaviour {
     [Tooltip("Reference to the sprite which indicates the enemy state.")]
     public SpriteRenderer stateIndicator;
 
+    private PlayerCombatController playerCombatController;
     private bool isInvincible = true;
     private Animator animator;
 
     // Use this for initialization
     void Start () {
         animator = GetComponent<Animator>();
+        playerCombatController = GameObject.FindGameObjectWithTag("SpritePlayer").GetComponent<PlayerCombatController>();
         Invoke("SwitchStates", Random.Range(stateSwitchTimeMin, stateSwitchTimeMax));
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (isInvincible)
-        {
-            // Debug.Log("Enemy CAN BE attacked now");
-        }
-        else
-        {
-            // Debug.Log("Enemy CANNOT BE attacked now");
-        }
-	}
+
+    }
 
     private void SwitchStates()
     {
@@ -49,6 +48,12 @@ public class EnemyCombatController : MonoBehaviour {
         Invoke("SwitchStates", Random.Range(stateSwitchTimeMin, stateSwitchTimeMax));
     }
 
+    public void AttackPlayer()
+    {
+        // TODO: only if the player is in proximity, else cancel the attack and switch to following mode
+        playerCombatController.DecreaseHealth(damagePerHit);
+    }
+
     public void DecreaseHealth(float amount)
     {
         if (isInvincible)
@@ -61,7 +66,7 @@ public class EnemyCombatController : MonoBehaviour {
             return;
         }
 
-        animator.SetTrigger("DamageTaken");
+        animator.SetTrigger("damageTaken");
         health -= amount;
     }
 }

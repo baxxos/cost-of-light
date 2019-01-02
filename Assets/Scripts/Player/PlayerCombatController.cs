@@ -67,6 +67,7 @@ public class PlayerCombatController : MonoBehaviour {
                 OnPlayerHealthZero();
             }
 
+            health = 0;
             return;
         }
 
@@ -82,10 +83,5 @@ public class PlayerCombatController : MonoBehaviour {
     public void IncreaseHealth(float amount)
     {
         // TODO
-    }
-
-    private void DealDamage()
-    {
-
     }
 }
