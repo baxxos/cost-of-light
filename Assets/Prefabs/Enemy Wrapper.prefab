@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4346533694264518}
   - component: {fileID: 212003727789767500}
-  - component: {fileID: 111206903049780172}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: SpriteEnemy
@@ -39,6 +38,7 @@ GameObject:
   - component: {fileID: 61858624602713402}
   - component: {fileID: 61727978497308300}
   - component: {fileID: 50780865683285242}
+  - component: {fileID: 95280360861010538}
   - component: {fileID: 114345838765638830}
   - component: {fileID: 114143739176226128}
   m_Layer: 0
@@ -72,7 +72,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4236786472250572}
   - component: {fileID: 212599174660910300}
-  - component: {fileID: 111717324335695444}
   m_Layer: 0
   m_Name: State Indicator
   m_TagString: SpriteEnemyState
@@ -205,36 +204,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.887028, y: 3}
   m_EdgeRadius: 0
---- !u!111 &111206903049780172
-Animation:
+--- !u!95 &95280360861010538
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1012298690438048}
+  m_GameObject: {fileID: 1252616998917768}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 78386286cb7363c47873fa3108353503, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 78386286cb7363c47873fa3108353503, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!111 &111717324335695444
-Animation:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442244001424386}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 3dfe956aabbe6474aa73af4b4752d44c, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 3dfe956aabbe6474aa73af4b4752d44c, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6dcb3f734c900f74b8e422bd154d2e1b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114143739176226128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,7 +236,7 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   stateSwitchTimeMin: 3
-  stateSwitchTimeMax: 10
+  stateSwitchTimeMax: 8
   stateIndicator: {fileID: 212599174660910300}
 --- !u!114 &114345838765638830
 MonoBehaviour:

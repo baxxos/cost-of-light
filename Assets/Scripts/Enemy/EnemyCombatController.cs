@@ -15,9 +15,11 @@ public class EnemyCombatController : MonoBehaviour {
     public SpriteRenderer stateIndicator;
 
     private bool isInvincible = true;
+    private Animator animator;
 
     // Use this for initialization
     void Start () {
+        animator = GetComponent<Animator>();
         Invoke("SwitchStates", Random.Range(stateSwitchTimeMin, stateSwitchTimeMax));
     }
 	
@@ -59,6 +61,7 @@ public class EnemyCombatController : MonoBehaviour {
             return;
         }
 
+        animator.SetTrigger("DamageTaken");
         health -= amount;
     }
 }
