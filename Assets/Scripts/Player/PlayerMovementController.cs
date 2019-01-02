@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    public float baseSpeed;
+    [Tooltip("Walking speed of the player character.")]
+    public float walkingSpeed;
+
+    private bool flippedLeft = false;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Animator animator;
@@ -21,37 +24,40 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleControls();
-    }
-
-    private void HandleControls()
-    {
         HandleKeyControls();
+
+        // To determine if the walking animation should be played
+        animator.SetFloat("horizontalMovement", Math.Abs(rb.velocity.x));
     }
 
     private void HandleKeyControls()
     {
-        if (Input.GetKey("d"))
+        if ((!flippedLeft && Input.GetKeyDown(KeyCode.A)) || (flippedLeft && Input.GetKeyDown(KeyCode.D)))
         {
-            spriteRenderer.flipX = false;
+            FlipCharacter();
+        }
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
             var velocity = rb.velocity;
-            velocity.x = baseSpeed;
+            velocity.x = (flippedLeft ? -walkingSpeed : walkingSpeed);
             rb.velocity = velocity;
         }
 
-        if (Input.GetKey("a"))
-        {
-            spriteRenderer.flipX = true;
-            var velocity = rb.velocity;
-            velocity.x = -baseSpeed;
-            rb.velocity = velocity;
-        }
-
-        if (Input.GetKeyUp("d") || Input.GetKeyUp("a"))
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
             rb.velocity = Vector2.zero;
         }
+    }
 
-        animator.SetFloat("horizontalMovement", Math.Abs(rb.velocity.x));
+    private void FlipCharacter()
+    {
+        /* Instead of flipping the sprite (which does not actually flip its skeleton?!?),
+         * we have to reverse the horizontal local scale so the bone animations will work properly */
+        Vector3 newLocalScale = transform.localScale;
+        newLocalScale.x *= -1;
+        transform.localScale = newLocalScale;
+
+        flippedLeft = !flippedLeft;
     }
 }

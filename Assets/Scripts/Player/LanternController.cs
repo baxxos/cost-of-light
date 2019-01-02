@@ -19,6 +19,7 @@ public class LanternController : MonoBehaviour {
     private Color originalLightColor;
     private SLKWaveFunctions originalWaveFunction;
     private Dictionary<string, float> originalWaveFunctionParameters;
+    private List<GameObject> revealedSprites;
     private List<GameObject> enlightedSprites;
     private List<Color> enlightedSpritesColors;
     private SpriteRenderer spriteRenderer;
@@ -44,8 +45,8 @@ public class LanternController : MonoBehaviour {
 
         // Compose a list of sprites affected by this light
         enlightedSprites = new List<GameObject>();
-        enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("SpritePlayer"));
+        enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("SpriteEnemy"));
         enlightedSpritesColors = new List<Color>(enlightedSprites.Count);
 
         // Remember the original colors of all sprites interacting with light
@@ -56,6 +57,18 @@ public class LanternController : MonoBehaviour {
             if (!enabledByDefault)
             {
                 sprite.GetComponent<SpriteRenderer>().color = Color.black;
+            }
+        }
+
+        // Compose a list of sprites revealed by this light
+        revealedSprites = new List<GameObject>();
+        revealedSprites.AddRange(GameObject.FindGameObjectsWithTag("SpriteEnemyState"));
+
+        foreach (GameObject sprite in revealedSprites)
+        {
+            if (!enabledByDefault)
+            {
+                sprite.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
     }
@@ -121,6 +134,11 @@ public class LanternController : MonoBehaviour {
         {
             var sprite = enlightedSprites[i];
             sprite.GetComponent<SpriteRenderer>().color = (isLit ? enlightedSpritesColors[i] : Color.black);
+        }
+
+        foreach (GameObject sprite in revealedSprites)
+        {
+            sprite.GetComponent<SpriteRenderer>().enabled = isLit;
         }
     }
 

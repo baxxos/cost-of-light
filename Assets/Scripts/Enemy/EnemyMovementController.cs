@@ -12,19 +12,19 @@ public class EnemyMovementController : MonoBehaviour {
     public float followSpeed;
     [Tooltip("How long (horizontal distance) should the enemy follow the player.")]
     public float followRange;
+    [Tooltip("Reference to the actual sprite of the enemy character.")]
+    public SpriteRenderer spriteRenderer;
 
     private enum EnemyState { approaching, attacking, following, returning, idle };
     private EnemyState currentState;
     private Rigidbody2D rb2d;
     private GameObject playerObject;
-    private SpriteRenderer spriteRenderer;
     private Vector2 spawnCoords;
 
 	// Use this for initialization
 	void Start () {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
-        playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerObject = GameObject.FindGameObjectWithTag("SpritePlayer");
 
         spawnCoords = transform.position;
         currentState = EnemyState.idle;
@@ -50,7 +50,7 @@ public class EnemyMovementController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if ((currentState == EnemyState.idle) && (col.gameObject.tag == "Player"))
+        if ((currentState == EnemyState.idle) && (col.gameObject.tag == "SpritePlayer"))
         {
             currentState = EnemyState.approaching;
         }
@@ -108,11 +108,9 @@ public class EnemyMovementController : MonoBehaviour {
 
     private void ApproachPlayer(GameObject player)
     {
-        transform.position = Vector2.MoveTowards(
-            transform.position, 
-            player.transform.position,
-            approachSpeed * Time.deltaTime
-        );
+        var velocity = rb2d.velocity;
+        velocity.x = (transform.position.x < player.transform.position.x ? approachSpeed : -approachSpeed);
+        rb2d.velocity = velocity;
 
         // Flip the sprite according to the movement direction
         var distance = transform.position.x - player.transform.position.x;
@@ -120,6 +118,7 @@ public class EnemyMovementController : MonoBehaviour {
 
         if (Math.Abs(distance) <= approachDistance)
         {
+            StopMoving();
             currentState = EnemyState.following;
             // TODO: attacking instead of following (follow only when player walks away)
         }

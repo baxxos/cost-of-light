@@ -48,7 +48,6 @@ public class PlayerCombatController : MonoBehaviour {
                 }
                 else if (!hitObject.isTrigger)
                 {
-                    Debug.Log("Enemy hit");
                     hitObject.GetComponent<EnemyCombatController>().DecreaseHealth(damagePerHit);
                 }
             }

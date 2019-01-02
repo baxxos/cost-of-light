@@ -4,8 +4,6 @@ using UnityEngine;
 using Prime31;
 
 public class LanternFlickerController : MonoBehaviour {
-    [Tooltip("Sprite which the flickering effect should follow")]
-    public SpriteRenderer spriteToFollow;
     [Tooltip("Sprite bone to which the flickering effect should adjust during animations")]
     public GameObject boneToFollow;
     [Tooltip("X offset from the bone to follow")]
@@ -81,14 +79,9 @@ public class LanternFlickerController : MonoBehaviour {
     private void AdjustPosition()
     {
         var newPosition = new Vector2(
-            boneToFollow.transform.position.x + xOffset,
+            boneToFollow.transform.position.x + (flippedLeft? xOffset : -xOffset),
             boneToFollow.transform.position.y + yOffset
         );
-
-        if (flippedLeft)
-        {
-            newPosition.x = 2 * spriteToFollow.transform.position.x - boneToFollow.transform.position.x - xOffset;
-        }
 
         transform.position = newPosition;
     }
