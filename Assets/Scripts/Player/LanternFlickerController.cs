@@ -46,11 +46,11 @@ public class LanternFlickerController : MonoBehaviour {
             flippedLeft = true;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.E))
         {
             SetLightEffectChanneling();
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.E))
         {
             SetLightEffectDefault();
         }

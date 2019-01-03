@@ -76,7 +76,7 @@ public class LanternController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // Toggle the light rendering on mouse click or key press
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Q))
         {
             if (fuelLevel > 0)
             {
@@ -88,13 +88,13 @@ public class LanternController : MonoBehaviour {
             }
         }
         // Replenish fuel in exchange of health while a key is held down
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(KeyCode.E))
         {
             colorCycler.ChangeOriginalColor(Color.red);
             spriteRenderer.enabled = true;
             ExchangeLanternFuel(fuelGenerationRate * Time.deltaTime);
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.E))
         {
             if (!isLit)
             {

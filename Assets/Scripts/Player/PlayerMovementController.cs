@@ -7,8 +7,10 @@ public class PlayerMovementController : MonoBehaviour
 {
     [Tooltip("Walking speed of the player character.")]
     public float walkingSpeed;
+    public float runningSpeed = 8;
 
     private bool flippedLeft = false;
+    private bool isRunning = false;
     private Rigidbody2D rb;
     private Animator animator;
 
@@ -35,16 +37,33 @@ public class PlayerMovementController : MonoBehaviour
             FlipCharacter();
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isRunning = true;
+        }
+
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
+           
             var velocity = rb.velocity;
-            velocity.x = (flippedLeft ? -walkingSpeed : walkingSpeed);
+            velocity.x = (isRunning ? runningSpeed : walkingSpeed);
+
+            if (flippedLeft)
+            {
+                velocity.x *= -1;
+            }
+            
             rb.velocity = velocity;
         }
 
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
+            isRunning = false;
             rb.velocity = Vector2.zero;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isRunning = false;
         }
     }
 

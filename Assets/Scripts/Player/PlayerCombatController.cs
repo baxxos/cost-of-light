@@ -37,9 +37,6 @@ public class PlayerCombatController : MonoBehaviour {
     {
         if (attackPoint.gameObject.activeSelf && !dealingDamage)
         {
-            Debug.Log("Looking for collisions at:");
-            Debug.Log(attackPoint.transform.position);
-            Debug.Log('\n');
             dealingDamage = true;
             Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius);
 
