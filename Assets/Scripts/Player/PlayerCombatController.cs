@@ -70,8 +70,10 @@ public class PlayerCombatController : MonoBehaviour {
             health = 0;
             return;
         }
-
-        health -= amount;
+        else
+        {
+            health -= amount;
+        }
 
         // Notify subscribers about health level decrease
         if (OnPlayerHealthChanged != null)

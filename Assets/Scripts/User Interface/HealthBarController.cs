@@ -23,15 +23,22 @@ public class HealthBarController : MonoBehaviour {
     void OnEnable()
     {
         combatController.OnPlayerHealthChanged += HandleHealthChange;
+        combatController.OnPlayerHealthZero += HandleHealthZero;
     }
 
     void OnDisable()
     {
         combatController.OnPlayerHealthChanged -= HandleHealthChange;
+        combatController.OnPlayerHealthZero -= HandleHealthZero;
     }
 
     private void HandleHealthChange(float health, float maxHealth)
     {
         transform.localScale = new Vector2(health / maxHealth, transform.localScale.y);
+    }
+
+    private void HandleHealthZero()
+    {
+        transform.localScale = new Vector2(0, transform.localScale.y);
     }
 }

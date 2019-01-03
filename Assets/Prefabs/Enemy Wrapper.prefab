@@ -256,7 +256,7 @@ MonoBehaviour:
   approachDistance: 2.25
   followSpeed: 4
   followRange: 7.5
-  returnSpeed: 6
+  returnSpeed: 8
   spriteRenderer: {fileID: 212003727789767500}
 --- !u!114 &114840400714762142
 MonoBehaviour:
