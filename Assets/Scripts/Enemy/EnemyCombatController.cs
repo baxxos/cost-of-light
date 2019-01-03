@@ -18,14 +18,17 @@ public class EnemyCombatController : MonoBehaviour {
     [Tooltip("Reference to the sprite which indicates the enemy state.")]
     public SpriteRenderer stateIndicator;
 
-    private PlayerCombatController playerCombatController;
     private bool isInvincible = true;
+    private GameObject playerObject;
     private Animator animator;
+    private EnemyStateManager stateManager;
 
     // Use this for initialization
     void Start () {
         animator = GetComponent<Animator>();
-        playerCombatController = GameObject.FindGameObjectWithTag("SpritePlayer").GetComponent<PlayerCombatController>();
+        stateManager = GetComponent<EnemyStateManager>();
+
+        playerObject = GameObject.FindGameObjectWithTag("SpritePlayer");
         Invoke("SwitchStates", Random.Range(stateSwitchTimeMin, stateSwitchTimeMax));
     }
 	
@@ -50,8 +53,15 @@ public class EnemyCombatController : MonoBehaviour {
 
     public void AttackPlayer()
     {
-        // TODO: only if the player is in proximity, else cancel the attack and switch to following mode
-        playerCombatController.DecreaseHealth(damagePerHit);
+        stateManager.CurrentState = EnemyStateManager.EnemyState.attacking;
+
+        // Triggers the attack animation which triggers the related enemy combat controller action
+        animator.SetTrigger("attack");
+    }
+
+    public void DealDamageToPlayer()
+    {
+        playerObject.GetComponent<PlayerCombatController>().DecreaseHealth(damagePerHit);
     }
 
     public void DecreaseHealth(float amount)
@@ -62,6 +72,7 @@ public class EnemyCombatController : MonoBehaviour {
         }
         else if (health - amount <= 0)
         {
+            stateManager.CancelAttack();
             gameObject.SetActive(false);
             return;
         }

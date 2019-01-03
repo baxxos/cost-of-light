@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 95280360861010538}
   - component: {fileID: 114345838765638830}
   - component: {fileID: 114143739176226128}
+  - component: {fileID: 114840400714762142}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -237,8 +238,8 @@ MonoBehaviour:
   maxHealth: 100
   damagePerHit: 10
   attackCooldown: 1
-  stateSwitchTimeMin: 3
-  stateSwitchTimeMax: 8
+  stateSwitchTimeMin: 2
+  stateSwitchTimeMax: 7
   stateIndicator: {fileID: 212599174660910300}
 --- !u!114 &114345838765638830
 MonoBehaviour:
@@ -254,8 +255,20 @@ MonoBehaviour:
   approachSpeed: 8
   approachDistance: 2.25
   followSpeed: 4
-  followRange: 5
+  followRange: 7.5
+  returnSpeed: 6
   spriteRenderer: {fileID: 212003727789767500}
+--- !u!114 &114840400714762142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1252616998917768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643274c1bcca05e4fad5acb96bc25090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212003727789767500
 SpriteRenderer:
   m_ObjectHideFlags: 1

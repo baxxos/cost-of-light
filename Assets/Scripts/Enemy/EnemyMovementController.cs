@@ -12,87 +12,36 @@ public class EnemyMovementController : MonoBehaviour {
     public float followSpeed;
     [Tooltip("How long (horizontal distance) should the enemy follow the player.")]
     public float followRange;
-    [Tooltip("Reference to the actual sprite of the enemy character.")]
+    [Tooltip("Speed at which the enemy retreats when the player is out of follow range.")]
+    public float returnSpeed;
+    [Tooltip("Reference to the sprite of the enemy character.")]
     public SpriteRenderer spriteRenderer;
 
-    // List of available enemy states and a property holding the current one
-    public enum EnemyState { approaching, attacking, following, returning, idle };
-    public EnemyState CurrentState { get; set; }
-
-    private Animator animator;
     private Rigidbody2D rb2d;
-    private GameObject playerObject;
     private Vector2 spawnCoords;
+    private EnemyStateManager stateManager;
     private EnemyCombatController combatController;
 
     // Use this for initialization
     void Start () {
         rb2d = GetComponent<Rigidbody2D>();
+        stateManager = GetComponent<EnemyStateManager>();
         combatController = GetComponent<EnemyCombatController>();
-        animator = GetComponent<Animator>();
-        playerObject = GameObject.FindGameObjectWithTag("SpritePlayer");
 
         spawnCoords = transform.position;
-        CurrentState = EnemyState.idle;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        switch (CurrentState)
-        {
-            case EnemyState.approaching:
-                ApproachPlayer(playerObject);
-                break;
-            case EnemyState.following:
-                FollowPlayer(playerObject);
-                break;
-            case EnemyState.returning:
-                ReturnToSpawnCoords();
-                break;
-            case EnemyState.attacking:
-                if (!IsInvoking("PerformAttack"))
-                {
-                    Invoke("PerformAttack", combatController.attackCooldown);
-                }
-                break;
-            default:
-                break;
-        }
+
 	}
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if ((CurrentState == EnemyState.idle) && (col.gameObject.tag == "SpritePlayer"))
-        {
-            CurrentState = EnemyState.approaching;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "SpritePlayer")
-        {
-            CancelAttack();
-            CurrentState = EnemyState.returning;
-        }
-    }
 
     private void StopMoving()
     {
         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
     }
 
-    private void PerformAttack()
-    {
-        animator.SetTrigger("attack");
-    }
-
-    private void CancelAttack()
-    {
-        CancelInvoke("PerformAttack");
-    }
-
-    private void ReturnToSpawnCoords()
+    public void ReturnToSpawnCoords()
     {
         float tolerance = .15f;
 
@@ -100,14 +49,14 @@ public class EnemyMovementController : MonoBehaviour {
         if ((transform.position.x >= (spawnCoords.x - tolerance)) && (transform.position.x <= (spawnCoords.x + tolerance)))
         {
             StopMoving();
-            CurrentState = EnemyState.idle;
+            stateManager.CurrentState = EnemyStateManager.EnemyState.idle;
             spriteRenderer.flipX = false;
         }
         else
         {
             // Keep a fixed velocity while retreating
             var velocity = rb2d.velocity;
-            velocity.x = (transform.position.x < spawnCoords.x ? followSpeed : -followSpeed);
+            velocity.x = (transform.position.x < spawnCoords.x ? returnSpeed : -returnSpeed);
             rb2d.velocity = velocity;
 
             // Flip the sprite according to the movement direction
@@ -115,7 +64,7 @@ public class EnemyMovementController : MonoBehaviour {
         }
     }
 
-    private void FollowPlayer(GameObject player)
+    public void FollowPlayer(GameObject player)
     {
         if (Math.Abs(transform.position.x - spawnCoords.x) <= followRange)
         {
@@ -124,21 +73,22 @@ public class EnemyMovementController : MonoBehaviour {
             velocity.x = (transform.position.x < player.transform.position.x ? followSpeed : -followSpeed);
             rb2d.velocity = velocity;
 
-            // If we catch the player, set the velocity to 0 and start attacking
+            // If we catch the player stop moving and start attacking
             if (Math.Abs(transform.position.x - player.transform.position.x) <= approachDistance)
             {
                 StopMoving();
-                // currentState = EnemyState.attacking;
+                combatController.AttackPlayer();
             }
         }
         else
         {
-            CurrentState = EnemyState.returning;
+            stateManager.CurrentState = EnemyStateManager.EnemyState.returning;
         }
     }
 
-    private void ApproachPlayer(GameObject player)
+    public void ApproachPlayer(GameObject player)
     {
+        // Generate velocity
         var velocity = rb2d.velocity;
         velocity.x = (transform.position.x < player.transform.position.x ? approachSpeed : -approachSpeed);
         rb2d.velocity = velocity;
@@ -150,10 +100,7 @@ public class EnemyMovementController : MonoBehaviour {
         if (Math.Abs(distance) <= approachDistance)
         {
             StopMoving();
-            PerformAttack();
-            CurrentState = EnemyState.attacking;
+            combatController.AttackPlayer();
         }
     }
-
-
 }

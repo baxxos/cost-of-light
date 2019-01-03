@@ -9,14 +9,12 @@ public class PlayerMovementController : MonoBehaviour
     public float walkingSpeed;
 
     private bool flippedLeft = false;
-    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Animator animator;
 
     // Use this for initialization
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
