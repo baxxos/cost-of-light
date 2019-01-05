@@ -175,7 +175,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 768
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 2122132507}
+  m_TargetTexture: {fileID: 757169588}
   m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 1
@@ -553,6 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59954220a8801d74c9cf1247265b39cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputCollector: {fileID: 718196410}
   walkingSpeed: 4
   runningSpeed: 8
 --- !u!50 &96560547
@@ -611,6 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30751771086284641a4e1b3b4aabc325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputCollector: {fileID: 718196410}
   health: 100
   maxHealth: 100
   damagePerHit: 35
@@ -690,8 +692,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 96560541}
-  scrollSpeed: 0.6
-  positionChangeThreshold: 0.005
+  scrollSpeed: 0.75
+  positionChangeThreshold: 0.001
 --- !u!50 &133571323
 Rigidbody2D:
   serializedVersion: 4
@@ -1324,7 +1326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 09755a4891f8d4526a7e0690a23dec7b, type: 3}
-  spriteLightRT: {fileID: 2122132507}
+  spriteLightRT: {fileID: 757169588}
   intensity: 1.25
 --- !u!20 &519420031
 Camera:
@@ -1971,6 +1973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 718196408}
   - component: {fileID: 718196409}
+  - component: {fileID: 718196410}
   m_Layer: 0
   m_Name: Scene Controller
   m_TagString: Untagged
@@ -2003,6 +2006,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1196477334}
+--- !u!114 &718196410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 718196407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7401a20e6e5e05140a37b5977d5fadd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &748705985
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,6 +2092,37 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 748705985}
   m_CullTransparentMesh: 0
+--- !u!84 &757169588
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1920
+  m_Height: 1080
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 7
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &779994811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2684,8 +2729,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ResumeScene
+      - m_Target: {fileID: 718196409}
+        m_MethodName: ResetScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3690,7 +3735,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1774012821}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 718196409}
+        m_MethodName: QuitScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1774012821
@@ -4473,34 +4529,3 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2112495761}
   m_CullTransparentMesh: 0
---- !u!84 &2122132507
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1920
-  m_Height: 1080
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 7
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1

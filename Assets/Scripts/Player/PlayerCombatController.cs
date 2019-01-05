@@ -1,13 +1,20 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 
 public class PlayerCombatController : MonoBehaviour {
+    [Tooltip("Reference to the input collector class (component).")]
+    public InputCollector inputCollector;
+    [Tooltip("Current amount of hitpoints.")]
     public float health = 100;
+    [Tooltip("Maximum amount of hitpoints.")]
     public float maxHealth = 100;
+    [Tooltip("Damage dealt per one hit.")]
     public float damagePerHit = 100;
-    public float attackRadius = 0.15f;
+    [Tooltip("Radius of each attack.")]
+    public float attackRadius = 0.5f;
+    [Tooltip("Reference to the game object used for calculating collisions when dealing damage (e.g. weapon)")]
     public Transform attackPoint;
+
     public event Action<float, float> OnPlayerHealthChanged;
     public event Action OnPlayerHealthZero;
 
@@ -21,16 +28,23 @@ public class PlayerCombatController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        HandleMouseControls();
         DealDamageIfAttacking();
     }
 
-    private void HandleMouseControls()
+    void OnEnable()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("attack");
-        }
+        inputCollector.OnAttack += Attack;
+    }
+
+    void OnDisable()
+    {
+        inputCollector.OnAttack -= Attack;
+    }
+
+    private void Attack()
+    {
+        // Trigger the attack animation during which the attack point gets activated
+        animator.SetTrigger("attack");
     }
 
     private void DealDamageIfAttacking()
