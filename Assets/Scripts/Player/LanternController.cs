@@ -5,13 +5,23 @@ using Prime31;
 
 public class LanternController : MonoBehaviour {
     // TODO: move this controller to the lantern game object (not the lights - add those as references)
+    [Tooltip("Reference to the input collector class (component).")]
+    public InputCollector inputCollector;
+    [Tooltip("Should the lantern be lit when the game starts?")]
     public bool enabledByDefault;
+    [Tooltip("Maximum amount of fuel stored in the lantern.")]
     public float maxFuelLevel = 100;
+    [Tooltip("Current amount of fuel.")]
     public float fuelLevel = 100;
+    [Tooltip("Amount of fuel consumed per unit of time.")]
     public float fuelConsumptionRate;
+    [Tooltip("Speed at which the fuel can be exchanged for health.")]
     public float fuelGenerationRate;
+    [Tooltip("Amount of health required for 1 generating unit of fuel.")]
     public float fuelToHealthRatio = 1;
+    [Tooltip("Reference to the player combat controller (e. g. for decreasing health).")]
     public PlayerCombatController combatController;
+
     public event Action<float, float> OnFuelLevelChanged;
     public event Action OnFuelDepleted;
 
@@ -26,7 +36,8 @@ public class LanternController : MonoBehaviour {
     private SpriteLightColorCycler colorCycler;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         colorCycler = GetComponent<SpriteLightColorCycler>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -74,35 +85,8 @@ public class LanternController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        // Toggle the light rendering on mouse click or key press
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Q))
-        {
-            if (fuelLevel > 0)
-            {
-                ToggleLanternLit(!isLit);
-            }
-            else
-            {
-                // TODO: play some sound
-            }
-        }
-        // Replenish fuel in exchange of health while a key is held down
-        else if (Input.GetKey(KeyCode.E))
-        {
-            colorCycler.ChangeOriginalColor(Color.red);
-            spriteRenderer.enabled = true;
-            ExchangeLanternFuel(fuelGenerationRate * Time.deltaTime);
-        }
-        else if (Input.GetKeyUp(KeyCode.E))
-        {
-            if (!isLit)
-            {
-                spriteRenderer.enabled = false;
-            }
-            colorCycler.ChangeOriginalColor(originalLightColor);
-        }
-        
+	void Update ()
+    {
         if (isLit)
         {
             ConsumeLanternFuel(fuelConsumptionRate * Time.deltaTime);
@@ -125,17 +109,51 @@ public class LanternController : MonoBehaviour {
         }
     }
 
-    private void ToggleLanternLit(bool newState)
+    void OnEnable ()
     {
-        isLit = newState;
-        spriteRenderer.enabled = (isLit ? true : false);
+        inputCollector.OnLanternToggle += ToggleLanternLit;
+        inputCollector.OnLanternExchange += ExchangeLanternFuel;
+        inputCollector.OnLanternStopExchange += StopLanternFuelExchange;
+    }
 
+    void OnDisable ()
+    {
+        inputCollector.OnLanternToggle -= ToggleLanternLit;
+        inputCollector.OnLanternExchange -= ExchangeLanternFuel;
+        inputCollector.OnLanternStopExchange -= StopLanternFuelExchange;
+    }
+
+    private void ExtinguishLantern()
+    {
+        isLit = false;
+        spriteRenderer.enabled = false;
+        AdjustSpritesToLight();
+    }
+
+    private void LightLantern()
+    {
+        isLit = true;
+        spriteRenderer.enabled = true;
+        AdjustSpritesToLight();
+    }
+
+    private void ToggleLanternLit()
+    {
+        isLit = !isLit;
+        spriteRenderer.enabled = isLit;
+        AdjustSpritesToLight();
+    }
+
+    private void AdjustSpritesToLight()
+    {
+        // Adjust sprites which are displayed as silhouettes when the light is off
         for (int i = 0; i < enlightedSprites.Count; i++)
         {
             var sprite = enlightedSprites[i];
             sprite.GetComponent<SpriteRenderer>().color = (isLit ? enlightedSpritesColors[i] : Color.black);
         }
 
+        // Adjust sprites which are hidden or revealed based on the light
         foreach (GameObject sprite in revealedSprites)
         {
             sprite.GetComponent<SpriteRenderer>().enabled = isLit;
@@ -147,7 +165,7 @@ public class LanternController : MonoBehaviour {
         // Stop rendering light & notify subscribers there's no fuel left
         if (fuelLevel - amount <= 0)
         {
-            ToggleLanternLit(false);
+            ExtinguishLantern();
 
             if (OnFuelDepleted != null)
             {
@@ -178,9 +196,22 @@ public class LanternController : MonoBehaviour {
         }
     }
 
-    private void ExchangeLanternFuel(float amount)
+    private void ExchangeLanternFuel()
     {
+        // Turn the light red
+        colorCycler.ChangeOriginalColor(Color.red);
+        spriteRenderer.enabled = true;
+
+        // Replenish fuel in exchange for health
+        float amount = fuelGenerationRate * Time.deltaTime;
         combatController.DecreaseHealth(amount * fuelToHealthRatio);
         AddLanternFuel(amount);
+    }
+
+    private void StopLanternFuelExchange()
+    {
+        // Restore the regular light look
+        spriteRenderer.enabled = isLit;
+        colorCycler.ChangeOriginalColor(originalLightColor);
     }
 }

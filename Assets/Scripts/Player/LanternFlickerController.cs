@@ -4,6 +4,8 @@ using UnityEngine;
 using Prime31;
 
 public class LanternFlickerController : MonoBehaviour {
+    [Tooltip("Reference to the input collector class (component).")]
+    public InputCollector inputCollector;
     [Tooltip("Sprite bone to which the flickering effect should adjust during animations")]
     public GameObject boneToFollow;
     [Tooltip("X offset from the bone to follow")]
@@ -11,6 +13,7 @@ public class LanternFlickerController : MonoBehaviour {
     [Tooltip("Y offset from the bone to follow")]
     public float xOffset;
 
+    private bool channelingEffectActive = false;
     private bool flippedLeft = false; 
     private Color originalLightColor;
     private SLKWaveFunctions originalWaveFunction;
@@ -37,29 +40,43 @@ public class LanternFlickerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (flippedLeft && Input.GetKeyDown("d"))
-        {
-            flippedLeft = false;
-        }
-        else if (!flippedLeft && Input.GetKeyDown("a"))
-        {
-            flippedLeft = true;
-        }
-
-        if (Input.GetKey(KeyCode.E))
-        {
-            SetLightEffectChanneling();
-        }
-        else if (Input.GetKeyUp(KeyCode.E))
-        {
-            SetLightEffectDefault();
-        }
-
         AdjustPosition();
+    }
+
+    void OnEnable()
+    {
+        inputCollector.OnTurnLeft += FlipLeft;
+
+        inputCollector.OnLanternExchange += SetLightEffectChanneling;
+        inputCollector.OnLanternStopExchange += SetLightEffectDefault;
+    }
+
+    void OnDisable()
+    {
+        inputCollector.OnTurnLeft -= FlipRight;
+
+        inputCollector.OnLanternExchange -= SetLightEffectChanneling;
+        inputCollector.OnLanternStopExchange -= SetLightEffectDefault;
+    }
+
+    private void FlipLeft()
+    {
+        flippedLeft = true;
+    }
+
+    private void FlipRight()
+    {
+        flippedLeft = false;
     }
 
     private void SetLightEffectChanneling()
     {
+        if (channelingEffectActive)
+        {
+            return;
+        }
+
+        channelingEffectActive = true;
         colorCycler.ChangeOriginalColor(Color.yellow);
         colorCycler.waveFunction = SLKWaveFunctions.SawTooth;
         colorCycler.offset = 0.25f;
@@ -69,6 +86,12 @@ public class LanternFlickerController : MonoBehaviour {
 
     private void SetLightEffectDefault()
     {
+        if (!channelingEffectActive)
+        {
+            return;
+        }
+
+        channelingEffectActive = false;
         colorCycler.ChangeOriginalColor(originalLightColor);
         colorCycler.waveFunction = originalWaveFunction;
         colorCycler.offset = originalWaveFunctionParameters["offset"];

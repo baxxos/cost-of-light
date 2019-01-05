@@ -15,8 +15,11 @@ public class InputCollector : MonoBehaviour {
     // Other player controls
     public Action OnPauseMenuRequested;
     public Action OnAttack;
+
+    // Lantern Controls
     public Action OnLanternToggle;
-    public Action OnLanternChanneling;
+    public Action OnLanternExchange;
+    public Action OnLanternStopExchange;
 
     private SceneController sceneController;
 
@@ -27,6 +30,31 @@ public class InputCollector : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        HandleKeyboardControls();
+        HandleMouseControls();
+    }
+
+    private void HandleMouseControls()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            NotifySubscribers(OnAttack);
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            NotifySubscribers(OnLanternToggle);
+        }
+    }
+
+    private void HandleKeyboardControls()
+    {
+        HandleKeyPressControls();
+        HandleKeyHoldControls();
+        HandleKeyReleaseControls();
+    }
+
+    private void HandleKeyPressControls()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             NotifySubscribers(OnPauseMenuRequested);
@@ -43,16 +71,26 @@ public class InputCollector : MonoBehaviour {
         {
             NotifySubscribers(OnStartRunning);
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.E))
         {
             NotifySubscribers(OnLanternToggle);
         }
+    }
 
+    private void HandleKeyHoldControls()
+    {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             NotifySubscribers(OnMove);
         }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            NotifySubscribers(OnLanternExchange);
+        }
+    }
 
+    private void HandleKeyReleaseControls()
+    {
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
             NotifySubscribers(OnStopMoving);
@@ -61,10 +99,9 @@ public class InputCollector : MonoBehaviour {
         {
             NotifySubscribers(OnStopRunning);
         }
-
-        if (Input.GetMouseButtonDown(0))
+        else if (Input.GetKeyUp(KeyCode.Q))
         {
-            NotifySubscribers(OnAttack);
+            NotifySubscribers(OnLanternStopExchange);
         }
     }
 
