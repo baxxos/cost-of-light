@@ -27,11 +27,13 @@ public class LightsCameraController : MonoBehaviour {
     void OnEnable()
     {
         combatController.OnPlayerHealthZero += PlayDeathAnimation;
+        combatController.OnPlayerHealthChanged += PlayDamageTakenAnimation;
     }
 
     void OnDisable()
     {
         combatController.OnPlayerHealthZero -= PlayDeathAnimation;
+        combatController.OnPlayerHealthChanged -= PlayDamageTakenAnimation;
     }
 
     private void PlayDeathAnimation()
@@ -39,5 +41,13 @@ public class LightsCameraController : MonoBehaviour {
         // Turn off the lights and trigger the darken animation
         lightsCamera.cullingMask = 0;
         animator.SetTrigger("healthZero");
+    }
+
+    private void PlayDamageTakenAnimation(float healthChange, float currentHealth, float maxhealth)
+    {
+        if (healthChange < 0)
+        {
+            animator.SetTrigger("healthLowered");
+        }
     }
 }

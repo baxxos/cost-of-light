@@ -32,9 +32,9 @@ public class HealthBarController : MonoBehaviour {
         combatController.OnPlayerHealthZero -= HandleHealthZero;
     }
 
-    private void HandleHealthChange(float health, float maxHealth)
+    private void HandleHealthChange(float healthChange, float currentHealth, float maxHealth)
     {
-        transform.localScale = new Vector2(health / maxHealth, transform.localScale.y);
+        transform.localScale = new Vector2(currentHealth / maxHealth, transform.localScale.y);
     }
 
     private void HandleHealthZero()

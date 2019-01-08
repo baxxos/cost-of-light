@@ -15,7 +15,7 @@ public class PlayerCombatController : MonoBehaviour {
     [Tooltip("Reference to the game object used for calculating collisions when dealing damage (e.g. weapon)")]
     public Transform attackPoint;
 
-    public event Action<float, float> OnPlayerHealthChanged;
+    public event Action<float, float, float> OnPlayerHealthChanged;
     public event Action OnPlayerHealthZero;
 
     private bool dealingDamage = false;
@@ -88,16 +88,11 @@ public class PlayerCombatController : MonoBehaviour {
         {
             health -= amount;
         }
-
-        // Notify subscribers about health level decrease
+        
+        // Notify subscribers about the damage, current health and maximum health
         if (OnPlayerHealthChanged != null)
         {
-            OnPlayerHealthChanged(health, maxHealth);
+            OnPlayerHealthChanged(-amount, health, maxHealth);
         }
-    }
-
-    public void IncreaseHealth(float amount)
-    {
-        // TODO
     }
 }
