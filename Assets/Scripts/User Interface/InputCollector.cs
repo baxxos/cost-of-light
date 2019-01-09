@@ -11,6 +11,7 @@ public class InputCollector : MonoBehaviour {
     public Action OnStopMoving;
     public Action OnStartRunning;
     public Action OnStopRunning;
+    public Action OnJump;
 
     // Other player controls
     public Action OnPauseMenuRequested;
@@ -59,7 +60,8 @@ public class InputCollector : MonoBehaviour {
         {
             NotifySubscribers(OnPauseMenuRequested);
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+
+        if (Input.GetKeyDown(KeyCode.A))
         {
             NotifySubscribers(OnTurnLeft);
         }
@@ -67,13 +69,20 @@ public class InputCollector : MonoBehaviour {
         {
             NotifySubscribers(OnTurnRight);
         }
-        else if (Input.GetKeyDown(KeyCode.LeftShift))
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             NotifySubscribers(OnStartRunning);
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
             NotifySubscribers(OnLanternToggle);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            NotifySubscribers(OnJump);
         }
     }
 

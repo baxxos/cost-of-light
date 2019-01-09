@@ -11,6 +11,8 @@ public class PlayerMovementController : MonoBehaviour
     public float walkingSpeed;
     [Tooltip("Running speed of the player character. Should be higher than the walking speed.")]
     public float runningSpeed = 8;
+    [Tooltip("Velocity generated on jump.")]
+    public float jumpVelocity = 12;
 
     private bool flippedLeft = false;
     private bool isRunning = false;
@@ -42,6 +44,8 @@ public class PlayerMovementController : MonoBehaviour
 
         inputCollector.OnStartRunning += StartRunning;
         inputCollector.OnStopRunning += StopRunning;
+
+        inputCollector.OnJump += Jump;
     }
 
     void OnDisable()
@@ -55,6 +59,8 @@ public class PlayerMovementController : MonoBehaviour
 
         inputCollector.OnStartRunning -= StartRunning;
         inputCollector.OnStopRunning -= StopRunning;
+
+        inputCollector.OnJump -= Jump;
     }
 
     private void FlipLocalScale()
@@ -115,5 +121,14 @@ public class PlayerMovementController : MonoBehaviour
     private void StopRunning()
     {
         isRunning = false;
+    }
+
+    private void Jump()
+    {
+        var velocity = rb2d.velocity;
+        velocity.y = jumpVelocity;
+        rb2d.velocity = velocity;
+
+        animator.SetTrigger("jump");
     }
 }
