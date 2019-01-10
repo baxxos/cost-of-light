@@ -16,6 +16,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private bool flippedLeft = false;
     private bool isRunning = false;
+    private bool isJumping = false;
     private Rigidbody2D rb2d;
     private Animator animator;
 
@@ -29,8 +30,9 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // To determine if the walking/running animation should be played
-        animator.SetFloat("horizontalMovement", Math.Abs(rb2d.velocity.x));
+        // To determine which movement animations should be played
+        animator.SetFloat("horizontalMovement", rb2d.velocity.x);
+        animator.SetFloat("verticalMovement", rb2d.velocity.y);
     }
 
     void OnEnable()
@@ -115,7 +117,10 @@ public class PlayerMovementController : MonoBehaviour
 
     private void StartRunning()
     {
-        isRunning = true;
+        if (!isJumping)
+        {
+            isRunning = true;
+        }
     }
 
     private void StopRunning()
@@ -125,10 +130,20 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Jump()
     {
+        if (isJumping)
+        {
+            return;
+        }
+
         var velocity = rb2d.velocity;
         velocity.y = jumpVelocity;
         rb2d.velocity = velocity;
 
-        animator.SetTrigger("jump");
+        isJumping = true;
+    }
+
+    private void Land()
+    {
+        isJumping = false;
     }
 }

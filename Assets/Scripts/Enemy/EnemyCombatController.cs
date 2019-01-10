@@ -32,10 +32,8 @@ public class EnemyCombatController : MonoBehaviour {
         Invoke("SwitchStates", Random.Range(stateSwitchTimeMin, stateSwitchTimeMax));
     }
 	
-	// Update is called once per frame
-	void Update () {
-
-    }
+    // Update is called once per frame
+    void Update () {}
 
     private void SwitchStates()
     {
