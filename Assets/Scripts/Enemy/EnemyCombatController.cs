@@ -21,11 +21,13 @@ public class EnemyCombatController : MonoBehaviour {
     private bool isInvincible = true;
     private GameObject playerObject;
     private Animator animator;
+    private AudioSource audioSource;
     private EnemyStateManager stateManager;
 
     // Use this for initialization
     void Start () {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         stateManager = GetComponent<EnemyStateManager>();
 
         playerObject = GameObject.FindGameObjectWithTag("SpritePlayer");
@@ -59,6 +61,7 @@ public class EnemyCombatController : MonoBehaviour {
 
     public void DealDamageToPlayer()
     {
+        audioSource.PlayOneShot(audioSource.clip);
         playerObject.GetComponent<PlayerCombatController>().DecreaseHealth(damagePerHit);
     }
 
