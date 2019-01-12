@@ -20,10 +20,12 @@ public class PlayerCombatController : MonoBehaviour {
 
     private bool dealingDamage = false;
     private Animator animator;
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start () {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -53,6 +55,7 @@ public class PlayerCombatController : MonoBehaviour {
         {
             dealingDamage = true;
             Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius);
+            audioSource.PlayOneShot(audioSource.clip);
 
             foreach (Collider2D hitObject in hitObjects)
             {
