@@ -22,11 +22,11 @@ public class InputCollector : MonoBehaviour {
     public Action OnLanternExchange;
     public Action OnLanternStopExchange;
 
-    private SceneController sceneController;
+    private PauseMenuController pauseMenuController;
 
 	// Use this for initialization
 	void Start () {
-        sceneController = GetComponent<SceneController>();
+        pauseMenuController = GetComponent<PauseMenuController>();
     }
 	
 	// Update is called once per frame
@@ -127,7 +127,7 @@ public class InputCollector : MonoBehaviour {
     private void NotifySubscribers(Action OnAction)
     {
         // Process player actions only if the game is running (except for the pause action)
-        if (sceneController.IsScenePaused && (OnAction != OnPauseMenuRequested))
+        if (pauseMenuController.IsScenePaused && (OnAction != OnPauseMenuRequested))
         {
             return;
         }

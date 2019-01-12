@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour {
+public class PauseMenuController : MonoBehaviour {
     public GameObject pausePanel;
     public bool IsScenePaused { get; set; }
 

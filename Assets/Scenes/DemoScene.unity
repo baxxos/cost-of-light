@@ -175,7 +175,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 768
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 492249419}
+  m_TargetTexture: {fileID: 1039040854}
   m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 1
@@ -545,8 +545,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputCollector: {fileID: 718196410}
-  health: 100
-  maxHealth: 100
+  health: 140
+  maxHealth: 140
   damagePerHit: 35
   attackRadius: 0.75
   attackPoint: {fileID: 2047968845}
@@ -683,7 +683,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4201458387014444, guid: e2837d901605fad49a61082e93c21009, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 190.67
+      value: 196.95
       objectReference: {fileID: 0}
     - target: {fileID: 4201458387014444, guid: e2837d901605fad49a61082e93c21009, type: 2}
       propertyPath: m_LocalPosition.y
@@ -971,8 +971,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 65.3}
-  m_SizeDelta: {x: 120, y: 30}
+  m_AnchoredPosition: {x: 0, y: 130}
+  m_SizeDelta: {x: 240, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &258342551
 MonoBehaviour:
@@ -993,9 +993,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
+    m_HighlightedColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+    m_PressedColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1258,8 +1258,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
-    m_FontStyle: 0
+    m_FontSize: 28
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
@@ -1529,37 +1529,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34b4bc01ea9fd9a48af59255c6931bbb, type: 2}
   m_IsPrefabAsset: 0
---- !u!84 &492249419
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1920
-  m_Height: 1080
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 7
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &514868022 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4254741791761366, guid: 34b4bc01ea9fd9a48af59255c6931bbb,
@@ -1603,7 +1572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 09755a4891f8d4526a7e0690a23dec7b, type: 3}
-  spriteLightRT: {fileID: 492249419}
+  spriteLightRT: {fileID: 1039040854}
   intensity: 1.25
 --- !u!20 &519420031
 Camera:
@@ -2402,8 +2371,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
-    m_FontStyle: 0
+    m_FontSize: 28
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
@@ -2497,7 +2466,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -3086,7 +3055,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 998427451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 191.59, y: 3.1, z: 0}
+  m_LocalPosition: {x: 200.32, y: 3.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 317991758}
@@ -3146,6 +3115,37 @@ Transform:
   m_Father: {fileID: 598438943}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1039040854
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1920
+  m_Height: 1080
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 7
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1150037341
 GameObject:
   m_ObjectHideFlags: 0
@@ -3180,8 +3180,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00012715656, y: 0.8}
-  m_SizeDelta: {x: 120, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0.8}
+  m_SizeDelta: {x: 240, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1150037343
 MonoBehaviour:
@@ -3202,9 +3202,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.14901961, g: 0.14901961, b: 0.14901961, a: 1}
+    m_HighlightedColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+    m_PressedColor: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3247,7 +3247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3443,7 +3443,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -505.6, y: -143.6}
+  m_SizeDelta: {x: -1300, y: -400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1196477336
 MonoBehaviour:
@@ -4214,7 +4214,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4201458387014444, guid: e2837d901605fad49a61082e93c21009, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 188.75
+      value: 191.93
       objectReference: {fileID: 0}
     - target: {fileID: 4201458387014444, guid: e2837d901605fad49a61082e93c21009, type: 2}
       propertyPath: m_LocalPosition.y
@@ -4476,8 +4476,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00012207031, y: -64.9}
-  m_SizeDelta: {x: 120, y: 30}
+  m_AnchoredPosition: {x: 0, y: -130}
+  m_SizeDelta: {x: 240, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1774012820
 MonoBehaviour:
@@ -4498,9 +4498,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.1509434, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.2830189, g: 0, b: 0, a: 1}
+    m_PressedColor: {r: 0.3584906, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -4543,7 +4543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2264151, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4677,8 +4677,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
-    m_FontStyle: 0
+    m_FontSize: 28
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
@@ -5063,7 +5063,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4201458387014444, guid: e2837d901605fad49a61082e93c21009, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 186.67
+      value: 186.7
       objectReference: {fileID: 0}
     - target: {fileID: 4201458387014444, guid: e2837d901605fad49a61082e93c21009, type: 2}
       propertyPath: m_LocalPosition.y
@@ -5432,7 +5432,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4190435173915644, guid: e9989ccf7aa217947beaa56d01c04b80, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 192.60938
+      value: 201.28
       objectReference: {fileID: 0}
     - target: {fileID: 4190435173915644, guid: e9989ccf7aa217947beaa56d01c04b80, type: 2}
       propertyPath: m_LocalPosition.y
@@ -5520,7 +5520,7 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: -20, y: -5, z: 0}
+    - position: {x: -30, y: -5, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -5529,7 +5529,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -20, y: 2.6780572, z: 0}
+    - position: {x: -30, y: 2.6780572, z: 0}
       leftTangent: {x: -1.2192029, y: -0.19373631, z: 0}
       rightTangent: {x: 1.2192018, y: 0.19373643, z: 0}
       mode: 0
@@ -5646,7 +5646,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: 200, y: 1.4860401, z: 0}
+    - position: {x: 225, y: 1.4860401, z: 0}
       leftTangent: {x: -2.2192383, y: 1.4177122, z: 0}
       rightTangent: {x: 1.1851654, y: -0.75711346, z: 0}
       mode: 0
@@ -5655,7 +5655,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: 200, y: -5, z: 0}
+    - position: {x: 225, y: -5, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -5711,8 +5711,8 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 0}
   m_Sprites: []
   m_LocalAABB:
-    m_Center: {x: 90, y: -0.40637016, z: 0}
-    m_Extent: {x: 110, y: 4.59363, z: 0}
+    m_Center: {x: 97.5, y: -0.40637016, z: 0}
+    m_Extent: {x: 127.5, y: 4.59363, z: 0}
 --- !u!68 &2073861842
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -5728,12 +5728,12 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -20, y: -5}
-  - {x: -20, y: 2.67805}
-  - {x: -20, y: 2.67805}
-  - {x: -15.74723, y: 2.75521}
-  - {x: -6.08316, y: 2.94575}
-  - {x: 4.35087, y: 3.18829}
+  - {x: -30, y: -5}
+  - {x: -30, y: 2.67805}
+  - {x: -30, y: 2.67805}
+  - {x: -24.18473, y: 2.75521}
+  - {x: -11.08316, y: 2.94575}
+  - {x: 2.78837, y: 3.18829}
   - {x: 10.91356, y: 3.42144}
   - {x: 10.91356, y: 3.42144}
   - {x: 14.13884, y: 3.66309}
@@ -5791,14 +5791,14 @@ EdgeCollider2D:
   - {x: 191.96211, y: 1.51144}
   - {x: 193.87839, y: 1.52783}
   - {x: 193.87839, y: 1.52783}
-  - {x: 196.18466, y: 1.49037}
-  - {x: 198.139, y: 1.47944}
-  - {x: 199.49342, y: 1.48226}
-  - {x: 200, y: 1.48604}
-  - {x: 200, y: 1.48604}
-  - {x: 200, y: -5}
-  - {x: 200, y: -5}
-  - {x: -20, y: -5}
+  - {x: 200.09093, y: 1.49037}
+  - {x: 210.639, y: 1.47944}
+  - {x: 220.58717, y: 1.48226}
+  - {x: 225, y: 1.48604}
+  - {x: 225, y: 1.48604}
+  - {x: 225, y: -5}
+  - {x: 225, y: -5}
+  - {x: -30, y: -5}
 --- !u!1 &2112495761
 GameObject:
   m_ObjectHideFlags: 0

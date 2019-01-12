@@ -324,8 +324,8 @@ MonoBehaviour:
   maxHealth: 100
   damagePerHit: 10
   attackCooldown: 1
-  stateSwitchTimeMin: 2
-  stateSwitchTimeMax: 7
+  stateSwitchTimeMin: 2.5
+  stateSwitchTimeMax: 5.5
   stateIndicator: {fileID: 212599174660910300}
 --- !u!114 &114345838765638830
 MonoBehaviour:
