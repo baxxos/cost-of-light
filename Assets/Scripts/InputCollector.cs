@@ -56,11 +56,13 @@ public class InputCollector : MonoBehaviour {
 
     private void HandleKeyPressControls()
     {
+        // Pause menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             NotifySubscribers(OnPauseMenuRequested);
         }
 
+        // Movement
         if (Input.GetKeyDown(KeyCode.A))
         {
             NotifySubscribers(OnTurnLeft);
@@ -75,24 +77,28 @@ public class InputCollector : MonoBehaviour {
             NotifySubscribers(OnStartRunning);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            NotifySubscribers(OnLanternToggle);
-        }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             NotifySubscribers(OnJump);
+        }
+
+        // Lantern
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            NotifySubscribers(OnLanternToggle);
         }
     }
 
     private void HandleKeyHoldControls()
     {
+        // Movement
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             NotifySubscribers(OnMove);
         }
-        else if (Input.GetKey(KeyCode.Q))
+
+        // Lantern
+        if (Input.GetKey(KeyCode.Q))
         {
             NotifySubscribers(OnLanternExchange);
         }
@@ -100,15 +106,19 @@ public class InputCollector : MonoBehaviour {
 
     private void HandleKeyReleaseControls()
     {
+        // Movement
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
             NotifySubscribers(OnStopMoving);
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             NotifySubscribers(OnStopRunning);
         }
-        else if (Input.GetKeyUp(KeyCode.Q))
+
+        // Lantern
+        if (Input.GetKeyUp(KeyCode.Q))
         {
             NotifySubscribers(OnLanternStopExchange);
         }
