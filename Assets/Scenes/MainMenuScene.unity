@@ -2389,7 +2389,7 @@ MonoBehaviour:
   m_Text: "You lost your way home walking through the woods. The only equipment you
     have is an old kitchen knife and a cursed lantern which is fueled by your own
     blood. \n\nYou can only continue straight, feed the lantern to light your way
-    and hope for the darkness to eventually end. Good luck with that."
+    and hope for the darkness to eventually end. Good luck."
 --- !u!222 &2134806537
 CanvasRenderer:
   m_ObjectHideFlags: 0
