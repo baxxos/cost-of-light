@@ -58,6 +58,7 @@ public class LanternController : MonoBehaviour {
         enlightedSprites = new List<GameObject>();
         enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("SpritePlayer"));
         enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("SpriteEnemy"));
+        enlightedSprites.AddRange(GameObject.FindGameObjectsWithTag("SpriteBearTrap"));
         enlightedSpritesColors = new List<Color>(enlightedSprites.Count);
 
         // Remember the original colors of all sprites interacting with light
