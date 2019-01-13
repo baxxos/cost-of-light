@@ -4,7 +4,7 @@ Cost of light is a small Unity-based videogame that started as a semestral assig
 You can use an old lantern to light your way and help you with timing the attacks. However, its fuel is limited and the only resource that can replace it is your health.
 
 ## Screenshots
-<img src="screenshot.png" alt="Game screenshot" width="600"/>
+![ScreenShot](screenshot.png)
 
 ## How to run this game
 TODO
