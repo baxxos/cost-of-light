@@ -15,14 +15,7 @@ public class LightsCameraController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        // TODO: move this to a separate class taking care of death/pausing the game etc.
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
-        {
-            lightsCamera.backgroundColor = Color.black;
-            Time.timeScale = 0;
-        }
-    }
+	void Update () {}
 
     void OnEnable()
     {
@@ -38,9 +31,8 @@ public class LightsCameraController : MonoBehaviour {
 
     private void PlayDeathAnimation()
     {
-        // Turn off the lights and trigger the darken animation
+        // Turn off the lights
         lightsCamera.cullingMask = 0;
-        animator.SetTrigger("healthZero");
     }
 
     private void PlayDamageTakenAnimation(float healthChange, float currentHealth, float maxhealth)

@@ -23,14 +23,16 @@ public class InputCollector : MonoBehaviour {
     public Action OnLanternStopExchange;
 
     private PauseMenuController pauseMenuController;
+    private GameOverMenuController gameOverMenuController;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         pauseMenuController = GetComponent<PauseMenuController>();
+        gameOverMenuController = GetComponent<GameOverMenuController>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         HandleKeyboardControls();
         HandleMouseControls();
     }
@@ -127,7 +129,7 @@ public class InputCollector : MonoBehaviour {
     private void NotifySubscribers(Action OnAction)
     {
         // Process player actions only if the game is running (except for the pause action)
-        if (pauseMenuController.IsScenePaused && (OnAction != OnPauseMenuRequested))
+        if (gameOverMenuController.IsGameOver || (pauseMenuController.IsScenePaused && (OnAction != OnPauseMenuRequested)))
         {
             return;
         }
