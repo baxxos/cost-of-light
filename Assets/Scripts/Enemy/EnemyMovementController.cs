@@ -23,7 +23,8 @@ public class EnemyMovementController : MonoBehaviour {
     private EnemyCombatController combatController;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         rb2d = GetComponent<Rigidbody2D>();
         stateManager = GetComponent<EnemyStateManager>();
         combatController = GetComponent<EnemyCombatController>();
@@ -32,9 +33,7 @@ public class EnemyMovementController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-
-	}
+	void Update() {}
 
     private void StopMoving()
     {

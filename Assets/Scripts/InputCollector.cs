@@ -26,13 +26,15 @@ public class InputCollector : MonoBehaviour {
     private GameOverMenuController gameOverMenuController;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         pauseMenuController = GetComponent<PauseMenuController>();
         gameOverMenuController = GetComponent<GameOverMenuController>();
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         HandleKeyboardControls();
         HandleMouseControls();
     }

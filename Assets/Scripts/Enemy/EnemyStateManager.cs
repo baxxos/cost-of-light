@@ -13,7 +13,8 @@ public class EnemyStateManager : MonoBehaviour {
     private EnemyMovementController movementController;
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+    {
         animator = GetComponent<Animator>();
         combatController = GetComponent<EnemyCombatController>();
         movementController = GetComponent<EnemyMovementController>();
@@ -23,7 +24,8 @@ public class EnemyStateManager : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update()
+    {
         switch (CurrentState)
         {
             case EnemyState.approaching:
