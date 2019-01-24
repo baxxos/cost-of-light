@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BearTrapController : MonoBehaviour {
+    [Tooltip("Amount of damage dealt to player after he triggers the trap.")]
+    public int damageDealt = 25;
+
     private GameObject playerObject;
+    private PlayerCombatController playerCombatController;
     private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
         playerObject = GameObject.FindGameObjectWithTag("SpritePlayer");
+        playerCombatController = playerObject.GetComponent<PlayerCombatController>();
         audioSource = GetComponent<AudioSource>();
 	}
 	
@@ -20,7 +25,7 @@ public class BearTrapController : MonoBehaviour {
         if (collision.tag == "SpritePlayer")
         {
             audioSource.PlayOneShot(audioSource.clip);
-            playerObject.GetComponent<PlayerCombatController>().DecreaseHealth(25);
+            playerCombatController.DecreaseHealth(damageDealt);
         }
     }
 }

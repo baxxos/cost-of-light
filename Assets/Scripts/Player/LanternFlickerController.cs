@@ -6,12 +6,18 @@ using Prime31;
 public class LanternFlickerController : MonoBehaviour {
     [Tooltip("Reference to the input collector class (component).")]
     public InputCollector inputCollector;
-    [Tooltip("Sprite bone to which the flickering effect should adjust during animations")]
+    [Tooltip("Sprite bone to which the flickering effect should adjust during animations.")]
     public GameObject boneToFollow;
-    [Tooltip("X offset from the bone to follow")]
+    [Tooltip("X offset from the bone to follow.")]
     public float yOffset;
-    [Tooltip("Y offset from the bone to follow")]
+    [Tooltip("Y offset from the bone to follow.")]
     public float xOffset;
+    [Tooltip("Color cycler offset during fuel/health exchange.")]
+    public float channelingColorOffset = 0.25f;
+    [Tooltip("Color cycler amplitude during fuel/health exchange.")]
+    public float channelingColorAmplitude = 0.75f;
+    [Tooltip("Color cycler frequency during fuel/health exchange.")]
+    public float channelingColorFrequency = 4f;
 
     private bool channelingEffectActive = false;
     private bool flippedLeft = false; 
@@ -79,9 +85,9 @@ public class LanternFlickerController : MonoBehaviour {
         channelingEffectActive = true;
         colorCycler.ChangeOriginalColor(Color.yellow);
         colorCycler.waveFunction = SLKWaveFunctions.SawTooth;
-        colorCycler.offset = 0.25f;
-        colorCycler.amplitude = 0.75f;
-        colorCycler.frequency = 4f;
+        colorCycler.offset = channelingColorOffset;
+        colorCycler.amplitude = channelingColorAmplitude;
+        colorCycler.frequency = channelingColorFrequency;
     }
 
     private void SetLightEffectDefault()
